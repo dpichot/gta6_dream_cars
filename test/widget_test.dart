@@ -1,30 +1,187 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:gta6_dream_cars/data/car_catalog.dart';
+import 'package:gta6_dream_cars/models/car.dart';
 import 'package:gta6_dream_cars/main.dart';
 
+Future<void> _returnCarFromSearch(WidgetTester tester, Car car) async {
+  await tester.tap(find.text('Rechercher une voiture'));
+  await tester.pumpAndSettle();
+  tester.state<NavigatorState>(find.byType(Navigator).last).pop<Car>(car);
+  await tester.pumpAndSettle();
+}
+
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('ajouter une voiture ne la marque pas comme acquise', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('DREAM GARAGE'), findsOneWidget);
+    expect(find.text('Garage vide'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await _returnCarFromSearch(tester, carCatalog.first);
+
+    expect(find.byIcon(Icons.check_box_outline_blank), findsOneWidget);
+    expect(find.text('1 VOITURE'), findsOneWidget);
+    expect(find.text('0 POSSÉDÉES'), findsOneWidget);
+
+    final preferences = await SharedPreferences.getInstance();
+    var savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['possédée'], isFalse);
+    expect(savedCars.single['image'], 'assets/cars/comet-s2.jpg');
+    expect(savedCars.single['nombrePlaces'], 2);
+
+    await tester.longPress(find.text('COMET S2'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Marquer comme possédée'));
+    await tester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.check_box), findsOneWidget);
+    savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['possédée'], isTrue);
+
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+
+    expect(find.text('1 VOITURE'), findsOneWidget);
+    expect(find.text('1 POSSÉDÉE'), findsOneWidget);
+    expect(find.byIcon(Icons.check_box), findsOneWidget);
+
+    await tester.longPress(find.text('COMET S2'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Marquer comme non possédée'));
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.check_box_outline_blank), findsOneWidget);
+    savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['possédée'], isFalse);
+  });
+
+  testWidgets('la fiche affiche les données et l’image du véhicule', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await _returnCarFromSearch(tester, carCatalog[1]);
+    await tester.tap(find.text("ANDREW NODE'S THRAX"));
+    await tester.pumpAndSettle();
+
+    expect(find.text('FICHE VÉHICULE'), findsOneWidget);
+    expect(find.byType(Image), findsAtLeastNWidgets(1));
+    await tester.scrollUntilVisible(find.byIcon(Icons.route), 250);
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.route), findsOneWidget);
+    expect(find.byIcon(Icons.terrain), findsOneWidget);
+    expect(find.text('847'), findsOneWidget);
+    expect(find.text('292'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('9.2'), 250);
+    await tester.pumpAndSettle();
+    expect(find.text('9.2'), findsOneWidget);
+    final sliders = tester.widgetList<Slider>(find.byType(Slider)).toList();
+    expect(sliders, hasLength(5));
+    expect(sliders.first.value, 9.2);
+    expect(
+      sliders.every((slider) => slider.value >= 1 && slider.value <= 10),
+      isTrue,
+    );
+  });
+
+  testWidgets('un retour de recherche supprime une voiture déjà listée', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await _returnCarFromSearch(tester, carCatalog.first);
+    expect(find.text('COMET S2'), findsOneWidget);
+
+    await _returnCarFromSearch(tester, carCatalog.first);
+    await tester.pumpAndSettle();
+    expect(find.text('Garage vide'), findsOneWidget);
+
+    final preferences = await SharedPreferences.getInstance();
+    final savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars, isEmpty);
+  });
+
+  testWidgets('un appui long propose possession et suppression', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await _returnCarFromSearch(tester, carCatalog.first);
+
+    await tester.longPress(find.text('COMET S2'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Marquer comme possédée'));
+    await tester.pumpAndSettle();
+
+    final preferences = await SharedPreferences.getInstance();
+    var savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['possédée'], isTrue);
+
+    await tester.longPress(find.text('COMET S2'));
+    await tester.pumpAndSettle();
+    expect(find.text('Marquer comme non possédée'), findsOneWidget);
+    await tester.tap(find.text('Supprimer du garage'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Supprimer'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Garage vide'), findsOneWidget);
+    savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars, isEmpty);
+  });
+
+  testWidgets('la fiche permet de supprimer la voiture', (tester) async {
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await _returnCarFromSearch(tester, carCatalog.first);
+    await tester.tap(find.text('COMET S2'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Supprimer de la liste'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Supprimer'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Garage vide'), findsOneWidget);
+    final preferences = await SharedPreferences.getInstance();
+    final savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars, isEmpty);
+  });
+
+  testWidgets('récupère les détails des voitures déjà sauvegardées', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'garage_cars': jsonEncode([
+        {
+          'id': 'pfister-comet-s2',
+          'nom': 'Comet S2',
+          'marque': 'Pfister',
+          'possédée': false,
+        },
+      ]),
+    });
+
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    expect(find.text('1 VOITURE'), findsOneWidget);
+    expect(find.text('0 POSSÉDÉES'), findsOneWidget);
+    await tester.ensureVisible(find.text('COMET S2'));
+    await tester.tap(find.text('COMET S2'));
+    await tester.pumpAndSettle();
+    expect(find.text('FICHE VÉHICULE'), findsOneWidget);
+    expect(find.byType(Image), findsAtLeastNWidgets(1));
   });
 }

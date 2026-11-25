@@ -1,17 +1,31 @@
-# gta6_dream_cars
+# Vice City Garage
 
-A new Flutter project.
+Application Flutter de garage inspirée de GTA 6. Le garage s’ouvre au lancement,
+permet d’ajouter les véhicules souhaités depuis la recherche, puis de les marquer
+comme acquis ou non avec leur interrupteur. La collection est conservée sur
+l’appareil avec `shared_preferences`.
 
-## Getting Started
+Les fiches véhicule regroupent catégorie, sécurité, classe, style, nombre de
+places, classements route/terre, modèle de base et statistiques de performance.
+Les classements sont des entiers entre 1 et 999 ; les statistiques de test sont
+des notes décimales entre 1 et 10 affichées sous forme de sliders en lecture
+seule. Les caractéristiques encore inconnues sont indiquées comme non renseignées.
+Les images des voitures et logos de marques sont chargés depuis `assets/`.
 
-This project is a starting point for a Flutter application.
+## Lancer l’application
 
-A few resources to get you started if this is your first Flutter project:
+```sh
+flutter pub get
+flutter run
+```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Les véhicules du catalogue peuvent être recherchés par nom ou par marque. La
+recherche utilise les miniatures ; le garage affiche une grille à deux colonnes
+et chaque voiture ouvre sa fiche détaillée.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Vérifier le projet
+
+```sh
+flutter test
+flutter analyze
+```

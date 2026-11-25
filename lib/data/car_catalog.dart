@@ -1,0 +1,45 @@
+import '../models/car.dart';
+
+const carCatalog = <Car>[
+  Car(
+    id: 'pfister-comet-s2',
+    nom: 'Comet S2',
+    marque: 'Pfister',
+    possedee: false,
+    categorie: 'Sportive',
+    style: 'Decapotable',
+    nombrePlaces: 2,
+    classementRoute: 723,
+    classementTerre: 486,
+    stats: CarStats(
+      vitesse: 8.6,
+      acceleration: 8.4,
+      adherenceAsphalte: 8.2,
+      adherenceTerre: 5.8,
+      robustesse: 6.1,
+    ),
+    image: 'assets/cars/comet-s2.jpg',
+    petiteImage: 'assets/cars/comet-s2_320x180.jpg',
+    logoMarque: 'assets/manufacturers/images_gta-5_manufacturers_pfister.avif',
+  ),
+  Car(
+    id: 'truffade-andrew-nodes-thrax',
+    nom: "Andrew Node's Thrax",
+    marque: 'Truffade',
+    possedee: false,
+    categorie: 'Supercar',
+    nombrePlaces: 2,
+    classementRoute: 847,
+    classementTerre: 292,
+    modeleBase: 'Bugatti Divo, Italdesign Zerouno',
+    stats: CarStats(
+      vitesse: 9.2,
+      acceleration: 8.7,
+      adherenceAsphalte: 9.1,
+      adherenceTerre: 6.4,
+      robustesse: 5.8,
+    ),
+    image: 'assets/cars/andrew-nodes-thrax.jpg',
+    petiteImage: 'assets/cars/andrew-nodes-thrax_320x180.jpg',
+  ),
+];
