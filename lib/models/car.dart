@@ -15,14 +15,9 @@ class Car {
     this.image,
     this.petiteImage,
     this.logoMarque,
-  }) : assert(
-         classementRoute == null ||
-             (classementRoute >= 1 && classementRoute <= 999),
-       ),
-       assert(
-         classementTerre == null ||
-             (classementTerre >= 1 && classementTerre <= 999),
-       );
+    this.unique = false,
+  }) : assert(classementRoute == null || (classementRoute >= 1 && classementRoute <= 999)),
+       assert(classementTerre == null || (classementTerre >= 1 && classementTerre <= 999));
 
   final String id;
   final String nom;
@@ -39,6 +34,7 @@ class Car {
   final String? image;
   final String? petiteImage;
   final String? logoMarque;
+  final bool unique;
 
   Car copyWith({bool? possedee}) {
     return Car(
@@ -57,6 +53,7 @@ class Car {
       image: image,
       petiteImage: petiteImage,
       logoMarque: logoMarque,
+      unique: unique,
     );
   }
 
@@ -77,6 +74,7 @@ class Car {
       image: image ?? fallback.image,
       petiteImage: petiteImage ?? fallback.petiteImage,
       logoMarque: logoMarque ?? fallback.logoMarque,
+      unique: fallback.unique,
     );
   }
 
@@ -96,6 +94,7 @@ class Car {
     'image': image,
     'petiteImage': petiteImage,
     'logoMarque': logoMarque,
+    'unique': unique,
   };
 
   factory Car.fromJson(Map<String, dynamic> json) {
@@ -112,36 +111,22 @@ class Car {
       classementRoute: json['classementRoute'] as int?,
       classementTerre: json['classementTerre'] as int?,
       modeleBase: json['modeleBase'] as String?,
-      stats: statsJson == null
-          ? null
-          : CarStats.fromJson(Map<String, dynamic>.from(statsJson as Map)),
+      stats: statsJson == null ? null : CarStats.fromJson(Map<String, dynamic>.from(statsJson as Map)),
       image: json['image'] as String?,
       petiteImage: json['petiteImage'] as String?,
       logoMarque: json['logoMarque'] as String?,
+      unique: json['unique'] as bool? ?? false,
     );
   }
 }
 
 class CarStats {
-  const CarStats({
-    this.vitesse,
-    this.acceleration,
-    this.adherenceAsphalte,
-    this.adherenceTerre,
-    this.robustesse,
-  }) : assert(vitesse == null || (vitesse >= 1 && vitesse <= 10)),
-       assert(
-         acceleration == null || (acceleration >= 1 && acceleration <= 10),
-       ),
-       assert(
-         adherenceAsphalte == null ||
-             (adherenceAsphalte >= 1 && adherenceAsphalte <= 10),
-       ),
-       assert(
-         adherenceTerre == null ||
-             (adherenceTerre >= 1 && adherenceTerre <= 10),
-       ),
-       assert(robustesse == null || (robustesse >= 1 && robustesse <= 10));
+  const CarStats({this.vitesse, this.acceleration, this.adherenceAsphalte, this.adherenceTerre, this.robustesse})
+    : assert(vitesse == null || (vitesse >= 1 && vitesse <= 10)),
+      assert(acceleration == null || (acceleration >= 1 && acceleration <= 10)),
+      assert(adherenceAsphalte == null || (adherenceAsphalte >= 1 && adherenceAsphalte <= 10)),
+      assert(adherenceTerre == null || (adherenceTerre >= 1 && adherenceTerre <= 10)),
+      assert(robustesse == null || (robustesse >= 1 && robustesse <= 10));
 
   final double? vitesse;
   final double? acceleration;

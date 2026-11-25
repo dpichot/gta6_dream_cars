@@ -3,12 +3,16 @@ import 'package:material_ui/material_ui.dart';
 
 import '../data/car_catalog.dart';
 import '../widgets/car_image.dart';
-import '../widgets/gradient_button.dart';
 
 class SearchCarPage extends StatefulWidget {
-  const SearchCarPage({super.key, required this.existingCarIds});
+  const SearchCarPage({
+    super.key,
+    required this.existingCarIds,
+    required this.isGarageFull,
+  });
 
   final Set<String> existingCarIds;
+  final bool isGarageFull;
 
   @override
   State<SearchCarPage> createState() => _SearchCarPageState();
@@ -33,7 +37,7 @@ class _SearchCarPageState extends State<SearchCarPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
             child: TextField(
-              autofocus: true,
+              autofocus: false,
               onChanged: (value) => setState(() => _query = value),
               decoration: InputDecoration(
                 hintText: 'Nom du véhicule ou marque',
@@ -142,7 +146,21 @@ class _SearchCarPageState extends State<SearchCarPage> {
                               ),
                               const SizedBox(width: 4),
                               InkWell(
-                                onTap: () => Navigator.pop(context, car),
+                                onTap: () {
+                                  if (alreadyAdded) {
+                                    Navigator.pop(context, car);
+                                  } else if (widget.isGarageFull) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          'La liste est limitée à 18 voitures.',
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.pop(context, car);
+                                  }
+                                },
                                 child: alreadyAdded
                                     ? const Icon(
                                         Icons.remove_circle_outline,
@@ -150,7 +168,11 @@ class _SearchCarPageState extends State<SearchCarPage> {
                                       )
                                     : Icon(
                                         Icons.add_circle_outline_outlined,
-                                        color: Colors.white,
+                                        color: widget.isGarageFull
+                                            ? Colors.white.withValues(
+                                                alpha: .35,
+                                              )
+                                            : Colors.white,
                                       ),
                               ),
                               const SizedBox(width: 8),

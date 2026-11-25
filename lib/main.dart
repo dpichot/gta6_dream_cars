@@ -1,3 +1,5 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:material_ui/material_ui.dart';
 
 import 'data/car_catalog.dart';
@@ -8,6 +10,14 @@ import 'services/car_storage.dart';
 import 'widgets/car_image.dart';
 import 'widgets/gradient_button.dart';
 
+enum _CarSort { ownership, name, brand, category }
+
+enum _CarGroup { ownership, brand, category }
+
+const pink = Color.fromARGB(255, 247, 120, 175);
+const turquoise = Color(0xFF22CBB5);
+const maxGarageCars = 18;
+
 void main() {
   runApp(const GarageApp());
 }
@@ -17,9 +27,6 @@ class GarageApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const pink = Color(0xFFFF4F9A);
-    const turquoise = Color(0xFF53E0D0);
-
     return MaterialApp(
       title: 'Vice City Garage',
       debugShowCheckedModeBanner: false,
@@ -37,15 +44,10 @@ class GarageApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorScheme:
-            ColorScheme.fromSeed(
-              seedColor: pink,
-              brightness: Brightness.dark,
-            ).copyWith(
-              primary: pink,
-              secondary: turquoise,
-              surface: const Color.fromARGB(255, 28, 35, 65),
-            ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: pink,
+          brightness: Brightness.dark,
+        ).copyWith(primary: pink, secondary: turquoise, surface: const Color.fromARGB(255, 28, 35, 65)),
         scaffoldBackgroundColor: Colors.transparent,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -78,6 +80,8 @@ class _GaragePageState extends State<GaragePage> {
   final CarStorage _storage = CarStorage();
   final Set<String> _savingCarIds = {};
   List<Car> _cars = [];
+  _CarSort _sortBy = _CarSort.name;
+  _CarGroup? _groupBy;
   bool _isLoading = true;
   String? _loadError;
 
@@ -91,19 +95,30 @@ class _GaragePageState extends State<GaragePage> {
     try {
       final savedCars = await _storage.loadCars();
       final catalogById = {for (final car in carCatalog) car.id: car};
-      final cars = savedCars
-          .map(
-            (car) => catalogById[car.id] == null
-                ? car
-                : car.withDefaultsFrom(catalogById[car.id]!),
-          )
-          .toList();
+      final cars = savedCars.map((car) => catalogById[car.id] == null ? car : car.withDefaultsFrom(catalogById[car.id]!)).toList();
+      var sortBy = _CarSort.name;
+      _CarGroup? groupBy;
+      Object? filterLoadError;
+      try {
+        final savedFilters = await _storage.loadFilters();
+        sortBy = _CarSort.values.byName(savedFilters.sortBy);
+        final savedGroupBy = savedFilters.groupBy;
+        groupBy = savedGroupBy == null ? null : _CarGroup.values.byName(savedGroupBy);
+      } catch (error) {
+        sortBy = _CarSort.name;
+        groupBy = null;
+        filterLoadError = error;
+      }
+
       if (!mounted) return;
       setState(() {
         _cars = cars;
+        _sortBy = sortBy;
+        _groupBy = groupBy;
         _isLoading = false;
         _loadError = null;
       });
+      if (filterLoadError != null) _showFilterLoadError(filterLoadError);
     } catch (error) {
       if (!mounted) return;
       setState(() {
@@ -116,8 +131,7 @@ class _GaragePageState extends State<GaragePage> {
   Future<void> _openSearch() async {
     final car = await Navigator.of(context).push<Car>(
       MaterialPageRoute(
-        builder: (_) =>
-            SearchCarPage(existingCarIds: _cars.map((car) => car.id).toSet()),
+        builder: (_) => SearchCarPage(existingCarIds: _cars.map((car) => car.id).toSet(), isGarageFull: _cars.length >= maxGarageCars),
       ),
     );
     if (car == null || !mounted) return;
@@ -130,6 +144,10 @@ class _GaragePageState extends State<GaragePage> {
   }
 
   Future<void> _addCar(Car car) async {
+    if (_cars.length >= maxGarageCars) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('La liste est limitée à 18 voitures.')));
+      return;
+    }
     final updatedCars = [..._cars, car.copyWith(possedee: false)];
     try {
       await _storage.saveCars(updatedCars);
@@ -160,52 +178,301 @@ class _GaragePageState extends State<GaragePage> {
     }
   }
 
-  Future<void> _showCarActions(Car car) async {
-    final action = await showModalBottomSheet<String>(
-      context: context,
-      backgroundColor: const Color.fromARGB(255, 28, 35, 65),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  Future<void> filter() async {
+    var selectedSort = _sortBy;
+    var selectedGroup = _groupBy;
+    final options = await _showBlurredModalBottomSheet<({_CarSort sortBy, _CarGroup? groupBy})>(
+      builder: (sheetContext) => StatefulBuilder(
+        builder: (context, setSheetState) => Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF202449), Color(0xFF191526), Color(0xFF0D0F16)],
+              stops: [0, .48, 1],
+            ),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 8,
+                children: [
+                  SectionTitle('TRIÉ PAR :'),
+                  DropdownButtonFormField<_CarSort>(
+                    initialValue: selectedSort,
+                    isExpanded: true,
+                    dropdownColor: const Color(0xFF191526),
+                    decoration: _filterDropdownDecoration(),
+                    items: const [
+                      DropdownMenuItem(value: _CarSort.ownership, child: Text('Statut (possédée)')),
+                      DropdownMenuItem(value: _CarSort.name, child: Text('Nom')),
+                      DropdownMenuItem(value: _CarSort.brand, child: Text('Marque')),
+                      DropdownMenuItem(value: _CarSort.category, child: Text('Catégorie')),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) {
+                        setSheetState(() => selectedSort = value);
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  SectionTitle('GROUPÉ PAR :'),
+                  DropdownButtonFormField<_CarGroup?>(
+                    initialValue: selectedGroup,
+                    isExpanded: true,
+                    dropdownColor: const Color(0xFF191526),
+                    decoration: _filterDropdownDecoration(),
+                    items: const [
+                      DropdownMenuItem(value: null, child: Text('Aucun')),
+                      DropdownMenuItem(value: _CarGroup.ownership, child: Text('Statut (possédée)')),
+                      DropdownMenuItem(value: _CarGroup.brand, child: Text('Marque')),
+                      DropdownMenuItem(value: _CarGroup.category, child: Text('Catégorie')),
+                    ],
+                    onChanged: (value) {
+                      setSheetState(() => selectedGroup = value);
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  GradientButton(
+                    onPressed: () => Navigator.pop(sheetContext, (sortBy: selectedSort, groupBy: selectedGroup)),
+                    icon: Icons.done,
+                    label: 'Appliquer',
+                    height: 40,
+                  ),
+                  // FilledButton(
+                  //   onPressed: () => Navigator.pop(sheetContext, (sortBy: selectedSort, groupBy: selectedGroup)),
+                  //   child: const Text('Appliquer'),
+                  // ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
-      builder: (sheetContext) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-                child: Text(
-                  car.nom.toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w900,
+    );
+
+    if (options == null || !mounted) return;
+    try {
+      await _storage.saveFilters(
+        sortBy: options.sortBy.name,
+        groupBy: options.groupBy?.name,
+      );
+      if (!mounted) return;
+      setState(() {
+        _sortBy = options.sortBy;
+        _groupBy = options.groupBy;
+      });
+    } catch (error) {
+      if (mounted) _showFilterSaveError(error);
+    }
+  }
+
+  Future<T?> _showBlurredModalBottomSheet<T>({required WidgetBuilder builder}) async {
+    return showGeneralDialog<T>(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: Colors.transparent,
+      transitionDuration: const Duration(milliseconds: 250),
+      pageBuilder: (context, animation, secondaryAnimation) => Align(
+        alignment: Alignment.bottomCenter,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 640, maxHeight: MediaQuery.sizeOf(context).height * .9),
+          child: SizedBox(
+            width: double.infinity,
+            child: Material(color: Colors.transparent, child: builder(context)),
+          ),
+        ),
+      ),
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final slideAnimation = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => Navigator.pop(context),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: const ColoredBox(color: Colors.transparent),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 640),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: SlideTransition(
+                    position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(slideAnimation),
+                    child: child,
                   ),
                 ),
               ),
-              ListTile(
-                leading: Icon(
-                  car.possedee
-                      ? Icons.remove_circle_outline
-                      : Icons.check_circle_outline,
-                  color: const Color(0xFF53E0D0),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  InputDecoration _filterDropdownDecoration() {
+    return InputDecoration(
+      filled: true,
+      fillColor: const Color.fromARGB(98, 12, 13, 27),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: const BorderSide(color: Color(0xFF292C38)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: const BorderSide(color: Color(0xFF292C38)),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+    );
+  }
+
+  int _compareCars(Car first, Car second) {
+    final comparison = switch (_sortBy) {
+      _CarSort.ownership =>
+        first.possedee == second.possedee
+            ? 0
+            : first.possedee
+            ? -1
+            : 1,
+      _CarSort.name => first.nom.toLowerCase().compareTo(second.nom.toLowerCase()),
+      _CarSort.brand => first.marque.toLowerCase().compareTo(second.marque.toLowerCase()),
+      _CarSort.category => _categoryName(first).toLowerCase().compareTo(_categoryName(second).toLowerCase()),
+    };
+    if (comparison != 0) return comparison;
+    final nameComparison = first.nom.toLowerCase().compareTo(second.nom.toLowerCase());
+    return nameComparison != 0 ? nameComparison : first.id.compareTo(second.id);
+  }
+
+  String _categoryName(Car car) {
+    final category = car.categorie?.trim();
+    return category == null || category.isEmpty ? 'Non catégorisée' : category;
+  }
+
+  List<Widget> _buildCarSections() {
+    final sortedCars = [..._cars]..sort(_compareCars);
+    if (_groupBy == null) return [_buildCarGrid(sortedCars)];
+
+    final groupedCars = <String, List<Car>>{};
+    for (final car in sortedCars) {
+      final groupName = switch (_groupBy!) {
+        _CarGroup.ownership => car.possedee ? 'Possédées' : 'Non possédées',
+        _CarGroup.brand => car.marque,
+        _CarGroup.category => _categoryName(car),
+      };
+      groupedCars.putIfAbsent(groupName, () => []).add(car);
+    }
+
+    final groupNames = groupedCars.keys.toList();
+    groupNames.sort((first, second) {
+      if (_groupBy == _CarGroup.ownership) {
+        return first == second
+            ? 0
+            : first == 'Possédées'
+            ? -1
+            : 1;
+      }
+      return first.toLowerCase().compareTo(second.toLowerCase());
+    });
+
+    return [
+      for (final groupName in groupNames) ...[
+        if (groupName != groupNames.first) const SizedBox(height: 20),
+        Text(
+          groupName.toUpperCase(),
+          style: TextStyle(fontWeight: FontWeight.w600, color: pink),
+        ),
+        SizedBox(height: 10),
+        _buildCarGrid(groupedCars[groupName]!),
+      ],
+    ];
+  }
+
+  Widget _buildCarGrid(List<Car> cars) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: cars.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        mainAxisExtent: 220,
+      ),
+      itemBuilder: (context, index) {
+        final car = cars[index];
+        return _GarageCarCard(
+          car: car,
+          isSaving: _savingCarIds.contains(car.id),
+          onTap: () => _showCarActions(car),
+          onPossessionChanged: (value) => _toggleOwnership(car.id, value),
+        );
+      },
+    );
+  }
+
+  Future<void> _showCarActions(Car car) async {
+    final action = await _showBlurredModalBottomSheet<String>(
+      builder: (sheetContext) => Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color.fromARGB(255, 23, 26, 53), Color(0xFF191526), Color(0xFF0D0F16)],
+            stops: [0, .48, 1],
+          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 8,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+                  child: Text(car.nom.toUpperCase(), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
                 ),
-                title: Text(
-                  car.possedee
-                      ? 'Marquer comme non possédée'
-                      : 'Marquer comme possédée',
+                Container(
+                  color: const Color.fromARGB(98, 12, 13, 27),
+                  padding: EdgeInsets.all(8),
+                  child: ListTile(
+                    leading: Icon(Icons.remove_red_eye_outlined, color: Colors.white),
+                    title: Text('Voir les détails'.toUpperCase()),
+                    onTap: () => Navigator.pop(sheetContext, 'view'),
+                  ),
                 ),
-                onTap: () => Navigator.pop(sheetContext, 'toggle'),
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.delete_outline,
-                  color: Color(0xFFFF6B6B),
+                Container(
+                  color: const Color.fromARGB(98, 12, 13, 27),
+                  padding: EdgeInsets.all(8),
+                  child: ListTile(
+                    leading: Icon(car.possedee ? Icons.remove_circle_outline : Icons.check_circle_outline, color: Colors.white),
+                    title: Text((car.possedee ? 'Marquer comme non possédée' : 'Marquer comme possédée').toUpperCase()),
+                    onTap: () => Navigator.pop(sheetContext, 'toggle'),
+                  ),
                 ),
-                title: const Text('Supprimer du garage'),
-                onTap: () => Navigator.pop(sheetContext, 'delete'),
-              ),
-            ],
+                Container(
+                  color: const Color.fromARGB(98, 12, 13, 27),
+                  padding: EdgeInsets.all(8),
+                  child: ListTile(
+                    leading: Icon(Icons.delete_outline, color: Colors.white),
+                    title: Text('Supprimer du garage'.toUpperCase()),
+                    onTap: () => Navigator.pop(sheetContext, 'delete'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -214,6 +481,8 @@ class _GaragePageState extends State<GaragePage> {
     if (!mounted) return;
     if (action == 'toggle') {
       await _toggleOwnership(car.id, !car.possedee);
+    } else if (action == 'view') {
+      await _openDetails(car);
     } else if (action == 'delete') {
       await _confirmAndRemoveCar(car);
     }
@@ -226,16 +495,8 @@ class _GaragePageState extends State<GaragePage> {
         title: const Text('Supprimer cette voiture ?'),
         content: Text('« ${car.nom} » sera retirée de ton garage.'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('Annuler'),
-          ),
-          GradientButton(
-            label: 'Supprimer',
-            compact: true,
-            height: 40,
-            onPressed: () => Navigator.pop(dialogContext, true),
-          ),
+          TextButton(onPressed: () => Navigator.pop(dialogContext, false), child: const Text('Annuler')),
+          TextButton(onPressed: () => Navigator.pop(dialogContext, true), child: const Text('Supprimer')),
         ],
       ),
     );
@@ -244,9 +505,7 @@ class _GaragePageState extends State<GaragePage> {
 
   Future<bool> _toggleOwnership(String id, bool possedee) async {
     if (_savingCarIds.contains(id)) return false;
-    final updatedCars = _cars
-        .map((car) => car.id == id ? car.copyWith(possedee: possedee) : car)
-        .toList();
+    final updatedCars = _cars.map((car) => car.id == id ? car.copyWith(possedee: possedee) : car).toList();
     setState(() => _savingCarIds.add(id));
 
     try {
@@ -265,19 +524,21 @@ class _GaragePageState extends State<GaragePage> {
   Future<void> _openDetails(Car car) async {
     await Navigator.of(context).push<void>(
       MaterialPageRoute(
-        builder: (_) => CarDetailPage(
-          car: car,
-          onPossessionChanged: (value) => _toggleOwnership(car.id, value),
-          onRemove: () => _removeCar(car.id),
-        ),
+        builder: (_) => CarDetailPage(car: car, onPossessionChanged: (value) => _toggleOwnership(car.id, value), onRemove: () => _removeCar(car.id)),
       ),
     );
   }
 
   void _showSaveError(Object error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Impossible de sauvegarder la voiture : $error')),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Impossible de sauvegarder la voiture : $error')));
+  }
+
+  void _showFilterLoadError(Object error) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Impossible de charger les filtres : $error')));
+  }
+
+  void _showFilterSaveError(Object error) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Impossible de sauvegarder les filtres : $error')));
   }
 
   @override
@@ -285,21 +546,19 @@ class _GaragePageState extends State<GaragePage> {
     final acquiredCount = _cars.where((car) => car.possedee).length;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: filter,
+        backgroundColor: Color(0xff23212e),
+        child: Icon(Icons.filter_alt_outlined, color: pink),
+      ),
       appBar: AppBar(
         title: Row(
           spacing: 10,
           children: [
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: Image.asset("assets/images/garage.webp"),
-            ),
+            SizedBox(width: 35, height: 35, child: Image.asset("assets/images/garage.webp")),
             Text(
               'dream garage'.toUpperCase(),
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -312,66 +571,18 @@ class _GaragePageState extends State<GaragePage> {
             : ListView(
                 padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
                 children: [
-                  GradientButton(
-                    onPressed: _openSearch,
-                    icon: Icons.search,
-                    label: 'Rechercher une voiture',
-                    height: 40,
-                  ),
+                  GradientButton(onPressed: _openSearch, icon: Icons.search, label: 'Rechercher une voiture', height: 40),
                   const SizedBox(height: 24),
                   Row(
                     spacing: 8,
                     children: [
-                      ClassTag(
-                        textSize: 12,
-                        label:
-                            '${_cars.length} ${_cars.length == 1 ? 'voiture' : 'voitures'}',
-                      ),
-                      ClassTag(
-                        textSize: 12,
-                        colors: [
-                          const Color(0xFF53E0D0),
-                          const Color(0xFF53E0D0),
-                        ],
-                        label:
-                            '$acquiredCount possédée${acquiredCount == 1 ? '' : 's'}',
-                      ),
+                      ClassTag(textSize: 12, label: '${_cars.length} / 18 ${_cars.length == 1 ? 'voiture' : 'voitures'}'),
+                      ClassTag(textSize: 12, label: '$acquiredCount possédée${acquiredCount == 1 ? '' : 's'}'),
                     ],
                   ),
-                  // Text(
-                  //   '${_cars.length} ${_cars.length == 1 ? 'voiture' : 'voitures'} · $acquiredCount acquise${acquiredCount == 1 ? '' : 's'}',
-                  //   style: TextStyle(
-                  //     color: Colors.white.withValues(alpha: .65),
-                  //   ),
-                  // ),
                   const SizedBox(height: 24),
-                  if (_cars.isEmpty)
-                    const _EmptyGarage()
-                  else ...[
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _cars.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            mainAxisExtent: 220,
-                          ),
-                      itemBuilder: (context, index) {
-                        final car = _cars[index];
-                        return _GarageCarCard(
-                          car: car,
-                          isSaving: _savingCarIds.contains(car.id),
-                          onTap: () => _openDetails(car),
-                          onLongPress: () => _showCarActions(car),
-                          onPossessionChanged: (value) =>
-                              _toggleOwnership(car.id, value),
-                        );
-                      },
-                    ),
-                  ],
+                  if (_cars.isEmpty) const _EmptyGarage() else ..._buildCarSections(),
+                  const SizedBox(height: 80),
                 ],
               ),
       ),
@@ -384,45 +595,41 @@ class _GarageCarCard extends StatelessWidget {
     required this.car,
     required this.isSaving,
     required this.onTap,
-    required this.onLongPress,
+    // required this.onLongPress,
     required this.onPossessionChanged,
   });
 
   final Car car;
   final bool isSaving;
   final VoidCallback onTap;
-  final VoidCallback onLongPress;
+  // final VoidCallback onLongPress;
   final ValueChanged<bool> onPossessionChanged;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.zero,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(color: const Color.fromARGB(98, 12, 13, 27)),
-      child: Column(
-        children: [
-          Expanded(
-            child: InkWell(
-              onTap: onTap,
-              onLongPress: onLongPress,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(color: const Color.fromARGB(98, 12, 13, 27)),
+        child: Column(
+          children: [
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Stack(
                     children: [
                       SizedBox(height: 110, child: CarImage(car: car)),
-                      // if (car.classe != null)
-                      Positioned(
-                        top: 5,
-                        right: 5,
-                        child: ClassTag(label: car.categorie!),
-                      ),
-                      Positioned(
-                        top: 5,
-                        left: 5,
-                        child: CarBrandLogo(car: car, size: 18),
-                      ),
+                      if (car.categorie != null) Positioned(top: 5, right: 5, child: ClassTag(label: car.categorie!)),
+                      Positioned(top: 5, left: 5, child: CarBrandLogo(car: car, size: 18)),
+                      if (car.unique)
+                        Positioned(
+                          bottom: 5,
+                          right: 5,
+                          child: ClassTag(label: "Remarquable", color: Color.fromARGB(153, 255, 191, 0)),
+                        ),
                     ],
                   ),
                   Padding(
@@ -438,11 +645,7 @@ class _GarageCarCard extends StatelessWidget {
                                 car.marque.toUpperCase(),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white.withValues(alpha: .5),
-                                ),
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white.withValues(alpha: .5)),
                               ),
                             ),
                           ],
@@ -451,11 +654,7 @@ class _GarageCarCard extends StatelessWidget {
                           car.nom.toUpperCase(),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            height: 1.1,
-                            fontWeight: FontWeight.w900,
-                          ),
+                          style: const TextStyle(fontSize: 14, height: 1.1, fontWeight: FontWeight.w900),
                         ),
                       ],
                     ),
@@ -463,80 +662,47 @@ class _GarageCarCard extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Possédée'.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      (car.possedee ? 'Possédée' : 'Non possédée').toUpperCase(),
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: onTap,
-                  child: car.possedee
-                      ? const Icon(
-                          Icons.check_box,
-                          color: Color(0xFF22CBB5),
-                          size: 18,
-                        )
-                      : const Icon(
-                          Icons.check_box_outline_blank,
-                          color: Colors.white,
-                          size: 18,
-                        ),
-                ),
-                // Switch(
-                //   key: ValueKey('ownership-${car.id}'),
-                //   value: car.possedee,
-                //   onChanged: isSaving ? null : onPossessionChanged,
-                //   activeThumbColor: const Color(0xFF53E0D0),
-                // ),
-              ],
+                  car.possedee
+                      ? const Icon(Icons.check_circle, color: turquoise, size: 18)
+                      : const Icon(Icons.remove_circle_outline, color: Colors.white, size: 18),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
 class ClassTag extends StatelessWidget {
-  const ClassTag({
-    super.key,
-    required this.label,
-    this.colors,
-    this.textSize = 8,
-  });
+  const ClassTag({super.key, required this.label, this.color, this.textSize = 8});
 
   final String label;
-  final List<Color>? colors;
+  final Color? color;
   final double textSize;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(98, 12, 13, 27),
-        borderRadius: BorderRadius.circular(0),
-      ),
+      decoration: BoxDecoration(color: color ?? const Color.fromARGB(98, 12, 13, 27), borderRadius: BorderRadius.circular(0)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         child: Text(
           label.toUpperCase(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: textSize,
-            fontWeight: FontWeight.w800,
-            letterSpacing: .5,
-          ),
+          style: TextStyle(fontSize: textSize, fontWeight: FontWeight.w800, letterSpacing: .5),
         ),
       ),
     );
@@ -548,22 +714,16 @@ class _EmptyGarage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      decoration: BoxDecoration(color: const Color.fromARGB(98, 12, 13, 27)),
+
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
         child: Column(
           children: [
-            const Icon(
-              Icons.directions_car_filled_outlined,
-              size: 44,
-              color: Color(0xFFFF4F9A),
-            ),
+            const Icon(Icons.directions_car_filled_outlined, size: 44, color: pink),
             const SizedBox(height: 14),
-            Text(
-              'Garage vide',
-              style: Theme.of(context).textTheme.titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
+            Text('Garage vide', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Text(
               'Ajoute les voitures qui te font envie.',

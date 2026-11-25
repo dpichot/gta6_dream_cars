@@ -184,4 +184,5 @@ void main() {
     expect(find.text('FICHE VÉHICULE'), findsOneWidget);
     expect(find.byType(Image), findsAtLeastNWidgets(1));
   });
+
 }
