@@ -218,7 +218,7 @@ class _InfoRow extends StatelessWidget {
             children: [
               Expanded(child: Text(label.toUpperCase())),
               const SizedBox(width: 12),
-              if ((label == "Sécurité" || label == "Accès" || label == "Traqueur") && value != null)
+              if ((label == "Sécurité" || label == "Accès" || label == "Traceur") && value != null)
                 Flexible(
                   child: Container(
                     padding: EdgeInsets.all(4),

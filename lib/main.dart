@@ -1,5 +1,3 @@
-import 'dart:ui' show ImageFilter;
-
 import 'package:material_ui/material_ui.dart';
 
 import 'data/car_catalog.dart';
@@ -7,6 +5,7 @@ import 'models/car.dart';
 import 'screens/car_detail_page.dart';
 import 'screens/search_car_page.dart';
 import 'services/car_storage.dart';
+import 'widgets/blurred_modal_bottom_sheet.dart';
 import 'widgets/car_image.dart';
 import 'widgets/garage_background.dart';
 import 'widgets/gradient_button.dart';
@@ -183,18 +182,11 @@ class _GaragePageState extends State<GaragePage> {
   Future<void> filter() async {
     var selectedSort = _sortBy;
     var selectedGroup = _groupBy;
-    final options = await _showBlurredModalBottomSheet<({_CarSort sortBy, _CarGroup? groupBy})>(
+    final options = await showBlurredModalBottomSheet<({_CarSort sortBy, _CarGroup? groupBy})>(
+      context: context,
       builder: (sheetContext) => StatefulBuilder(
         builder: (context, setSheetState) => Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFF202449), Color(0xFF191526), Color(0xFF0D0F16)],
-              stops: [0, .48, 1],
-            ),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-          ),
+          decoration: filterSheetDecoration,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
@@ -208,7 +200,7 @@ class _GaragePageState extends State<GaragePage> {
                     initialValue: selectedSort,
                     isExpanded: true,
                     dropdownColor: const Color(0xFF191526),
-                    decoration: _filterDropdownDecoration(),
+                    decoration: filterDropdownDecoration(),
                     items: const [
                       DropdownMenuItem(value: _CarSort.ownership, child: Text('Statut (possédée)')),
                       DropdownMenuItem(value: _CarSort.name, child: Text('Nom')),
@@ -227,7 +219,7 @@ class _GaragePageState extends State<GaragePage> {
                     initialValue: selectedGroup,
                     isExpanded: true,
                     dropdownColor: const Color(0xFF191526),
-                    decoration: _filterDropdownDecoration(),
+                    decoration: filterDropdownDecoration(),
                     items: const [
                       DropdownMenuItem(value: null, child: Text('Aucun')),
                       DropdownMenuItem(value: _CarGroup.ownership, child: Text('Statut (possédée)')),
@@ -268,71 +260,6 @@ class _GaragePageState extends State<GaragePage> {
     } catch (error) {
       if (mounted) _showFilterSaveError(error);
     }
-  }
-
-  Future<T?> _showBlurredModalBottomSheet<T>({required WidgetBuilder builder}) async {
-    return showGeneralDialog<T>(
-      context: context,
-      barrierDismissible: false,
-      barrierColor: Colors.transparent,
-      transitionDuration: const Duration(milliseconds: 250),
-      pageBuilder: (context, animation, secondaryAnimation) => Align(
-        alignment: Alignment.bottomCenter,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 640, maxHeight: MediaQuery.sizeOf(context).height * .9),
-          child: SizedBox(
-            width: double.infinity,
-            child: Material(color: Colors.transparent, child: builder(context)),
-          ),
-        ),
-      ),
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
-        final slideAnimation = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
-        return Stack(
-          children: [
-            Positioned.fill(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.pop(context),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: const ColoredBox(color: Colors.transparent),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 640),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: SlideTransition(
-                    position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(slideAnimation),
-                    child: child,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  InputDecoration _filterDropdownDecoration() {
-    return InputDecoration(
-      filled: true,
-      fillColor: const Color.fromARGB(98, 12, 13, 27),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: Color(0xFF292C38)),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: Color(0xFF292C38)),
-      ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-    );
   }
 
   int _compareCars(Car first, Car second) {
@@ -430,7 +357,8 @@ class _GaragePageState extends State<GaragePage> {
   }
 
   Future<void> _showCarActions(Car car) async {
-    final action = await _showBlurredModalBottomSheet<String>(
+    final action = await showBlurredModalBottomSheet<String>(
+      context: context,
       builder: (sheetContext) => Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
