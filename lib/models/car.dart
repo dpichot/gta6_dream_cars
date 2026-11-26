@@ -8,13 +8,12 @@ class Car {
     this.classementTerre,
     this.categorie,
     this.securite,
+    this.tracker,
+    this.access,
     this.style,
     this.nombrePlaces,
     this.modeleBase,
     this.stats,
-    this.image,
-    this.petiteImage,
-    this.logoMarque,
     this.unique = false,
   }) : assert(classementRoute == null || (classementRoute >= 1 && classementRoute <= 999)),
        assert(classementTerre == null || (classementTerre >= 1 && classementTerre <= 999));
@@ -24,16 +23,15 @@ class Car {
   final String marque;
   final bool possedee;
   final String? categorie;
-  final String? securite;
+  final bool? securite;
+  final String? access;
+  final String? tracker;
   final String? style;
   final int? nombrePlaces;
   final int? classementRoute;
   final int? classementTerre;
   final String? modeleBase;
   final CarStats? stats;
-  final String? image;
-  final String? petiteImage;
-  final String? logoMarque;
   final bool unique;
 
   Car copyWith({bool? possedee}) {
@@ -44,15 +42,14 @@ class Car {
       possedee: possedee ?? this.possedee,
       categorie: categorie,
       securite: securite,
+      tracker: tracker,
+      access: access,
       style: style,
       nombrePlaces: nombrePlaces,
       classementRoute: classementRoute,
       classementTerre: classementTerre,
       modeleBase: modeleBase,
       stats: stats,
-      image: image,
-      petiteImage: petiteImage,
-      logoMarque: logoMarque,
       unique: unique,
     );
   }
@@ -65,15 +62,14 @@ class Car {
       possedee: possedee,
       categorie: categorie ?? fallback.categorie,
       securite: securite ?? fallback.securite,
+      tracker: tracker ?? fallback.tracker,
+      access: access ?? fallback.access,
       style: style ?? fallback.style,
       nombrePlaces: nombrePlaces ?? fallback.nombrePlaces,
       classementRoute: classementRoute ?? fallback.classementRoute,
       classementTerre: classementTerre ?? fallback.classementTerre,
       modeleBase: modeleBase ?? fallback.modeleBase,
       stats: stats ?? fallback.stats,
-      image: image ?? fallback.image,
-      petiteImage: petiteImage ?? fallback.petiteImage,
-      logoMarque: logoMarque ?? fallback.logoMarque,
       unique: fallback.unique,
     );
   }
@@ -85,15 +81,14 @@ class Car {
     'possédée': possedee,
     'categorie': categorie,
     'securite': securite,
+    'tracker': tracker,
+    'access': access,
     'style': style,
     'nombrePlaces': nombrePlaces,
     'classementRoute': classementRoute,
     'classementTerre': classementTerre,
     'modeleBase': modeleBase,
     'stats': stats?.toJson(),
-    'image': image,
-    'petiteImage': petiteImage,
-    'logoMarque': logoMarque,
     'unique': unique,
   };
 
@@ -105,16 +100,15 @@ class Car {
       marque: json['marque'] as String,
       possedee: json['possédée'] as bool? ?? false,
       categorie: json['categorie'] as String?,
-      securite: json['securite'] as String?,
+      securite: json['securite'] as bool?,
+      tracker: json['tracker'] as String?,
+      access: json['access'] as String?,
       style: json['style'] as String?,
       nombrePlaces: json['nombrePlaces'] as int?,
       classementRoute: json['classementRoute'] as int?,
       classementTerre: json['classementTerre'] as int?,
       modeleBase: json['modeleBase'] as String?,
       stats: statsJson == null ? null : CarStats.fromJson(Map<String, dynamic>.from(statsJson as Map)),
-      image: json['image'] as String?,
-      petiteImage: json['petiteImage'] as String?,
-      logoMarque: json['logoMarque'] as String?,
       unique: json['unique'] as bool? ?? false,
     );
   }
@@ -122,11 +116,11 @@ class Car {
 
 class CarStats {
   const CarStats({this.vitesse, this.acceleration, this.adherenceAsphalte, this.adherenceTerre, this.robustesse})
-    : assert(vitesse == null || (vitesse >= 1 && vitesse <= 10)),
-      assert(acceleration == null || (acceleration >= 1 && acceleration <= 10)),
-      assert(adherenceAsphalte == null || (adherenceAsphalte >= 1 && adherenceAsphalte <= 10)),
-      assert(adherenceTerre == null || (adherenceTerre >= 1 && adherenceTerre <= 10)),
-      assert(robustesse == null || (robustesse >= 1 && robustesse <= 10));
+    : assert(vitesse == null || (vitesse >= 0.1 && vitesse <= 10)),
+      assert(acceleration == null || (acceleration >= 0.1 && acceleration <= 10)),
+      assert(adherenceAsphalte == null || (adherenceAsphalte >= 0.1 && adherenceAsphalte <= 10)),
+      assert(adherenceTerre == null || (adherenceTerre >= 0.1 && adherenceTerre <= 10)),
+      assert(robustesse == null || (robustesse >= 0.1 && robustesse <= 10));
 
   final double? vitesse;
   final double? acceleration;

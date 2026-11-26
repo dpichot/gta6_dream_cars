@@ -8,6 +8,7 @@ import 'screens/car_detail_page.dart';
 import 'screens/search_car_page.dart';
 import 'services/car_storage.dart';
 import 'widgets/car_image.dart';
+import 'widgets/garage_background.dart';
 import 'widgets/gradient_button.dart';
 
 enum _CarSort { ownership, name, brand, category }
@@ -30,17 +31,7 @@ class GarageApp extends StatelessWidget {
     return MaterialApp(
       title: 'Vice City Garage',
       debugShowCheckedModeBanner: false,
-      builder: (context, child) => Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF202449), Color(0xFF191526), Color(0xFF0D0F16)],
-            stops: [0, .48, 1],
-          ),
-        ),
-        child: child,
-      ),
+      builder: (context, child) => GarageBackground(child: child ?? const SizedBox.shrink()),
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
@@ -67,6 +58,22 @@ class GarageApp extends StatelessWidget {
       home: const GaragePage(),
     );
   }
+}
+
+PageRouteBuilder<T> _garagePageRoute<T>(Widget page) {
+  return PageRouteBuilder<T>(
+    opaque: false,
+    barrierColor: Colors.transparent,
+    transitionDuration: const Duration(milliseconds: 300),
+    reverseTransitionDuration: const Duration(milliseconds: 300),
+    pageBuilder: (_, _, _) => GarageBackground(child: page),
+    transitionsBuilder: (_, animation, _, child) {
+      final curvedAnimation = CurvedAnimation(parent: animation, curve: Curves.ease);
+      final slideAnimation = Tween<Offset>(begin: const Offset(0, .5), end: Offset.zero).animate(curvedAnimation);
+
+      return SlideTransition(position: slideAnimation, child: child);
+    },
+  );
 }
 
 class GaragePage extends StatefulWidget {
@@ -129,33 +136,28 @@ class _GaragePageState extends State<GaragePage> {
   }
 
   Future<void> _openSearch() async {
-    final car = await Navigator.of(context).push<Car>(
-      MaterialPageRoute(
-        builder: (_) => SearchCarPage(existingCarIds: _cars.map((car) => car.id).toSet(), isGarageFull: _cars.length >= maxGarageCars),
+    await Navigator.of(context).push<void>(
+      _garagePageRoute<void>(
+        SearchCarPage(existingCarIds: _cars.map((car) => car.id).toSet(), garageCapacity: maxGarageCars, onAddCar: _addCar, onRemoveCar: _removeCar),
       ),
     );
-    if (car == null || !mounted) return;
-    if (_cars.any((item) => item.id == car.id)) {
-      await _removeCar(car.id);
-      return;
-    }
-
-    await _addCar(car);
   }
 
-  Future<void> _addCar(Car car) async {
+  Future<bool> _addCar(Car car) async {
     if (_cars.length >= maxGarageCars) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('La liste est limitée à 18 voitures.')));
-      return;
+      return false;
     }
     final updatedCars = [..._cars, car.copyWith(possedee: false)];
     try {
       await _storage.saveCars(updatedCars);
-      if (!mounted) return;
+      if (!mounted) return false;
       setState(() => _cars = updatedCars);
+      return true;
     } catch (error) {
-      if (!mounted) return;
+      if (!mounted) return false;
       _showSaveError(error);
+      return false;
     }
   }
 
@@ -257,10 +259,7 @@ class _GaragePageState extends State<GaragePage> {
 
     if (options == null || !mounted) return;
     try {
-      await _storage.saveFilters(
-        sortBy: options.sortBy.name,
-        groupBy: options.groupBy?.name,
-      );
+      await _storage.saveFilters(sortBy: options.sortBy.name, groupBy: options.groupBy?.name);
       if (!mounted) return;
       setState(() {
         _sortBy = options.sortBy;
@@ -358,9 +357,9 @@ class _GaragePageState extends State<GaragePage> {
     return category == null || category.isEmpty ? 'Non catégorisée' : category;
   }
 
-  List<Widget> _buildCarSections() {
+  List<({String name, List<Car> cars})> _getOrderedCarGroups() {
     final sortedCars = [..._cars]..sort(_compareCars);
-    if (_groupBy == null) return [_buildCarGrid(sortedCars)];
+    if (_groupBy == null) return [(name: '', cars: sortedCars)];
 
     final groupedCars = <String, List<Car>>{};
     for (final car in sortedCars) {
@@ -384,15 +383,24 @@ class _GaragePageState extends State<GaragePage> {
       return first.toLowerCase().compareTo(second.toLowerCase());
     });
 
+    return [for (final groupName in groupNames) (name: groupName, cars: groupedCars[groupName]!)];
+  }
+
+  List<Car> _getDisplayedCars() => [for (final group in _getOrderedCarGroups()) ...group.cars];
+
+  List<Widget> _buildCarSections() {
+    final orderedGroups = _getOrderedCarGroups();
+    if (_groupBy == null) return [_buildCarGrid(orderedGroups.single.cars)];
+
     return [
-      for (final groupName in groupNames) ...[
-        if (groupName != groupNames.first) const SizedBox(height: 20),
+      for (var index = 0; index < orderedGroups.length; index++) ...[
+        if (index > 0) const SizedBox(height: 20),
         Text(
-          groupName.toUpperCase(),
+          orderedGroups[index].name.toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.w600, color: pink),
         ),
-        SizedBox(height: 10),
-        _buildCarGrid(groupedCars[groupName]!),
+        const SizedBox(height: 10),
+        _buildCarGrid(orderedGroups[index].cars),
       ],
     ];
   }
@@ -413,7 +421,8 @@ class _GaragePageState extends State<GaragePage> {
         return _GarageCarCard(
           car: car,
           isSaving: _savingCarIds.contains(car.id),
-          onTap: () => _showCarActions(car),
+          onTap: () => _openDetails(car),
+          onLongPress: () => _showCarActions(car),
           onPossessionChanged: (value) => _toggleOwnership(car.id, value),
         );
       },
@@ -444,15 +453,15 @@ class _GaragePageState extends State<GaragePage> {
                   padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
                   child: Text(car.nom.toUpperCase(), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
                 ),
-                Container(
-                  color: const Color.fromARGB(98, 12, 13, 27),
-                  padding: EdgeInsets.all(8),
-                  child: ListTile(
-                    leading: Icon(Icons.remove_red_eye_outlined, color: Colors.white),
-                    title: Text('Voir les détails'.toUpperCase()),
-                    onTap: () => Navigator.pop(sheetContext, 'view'),
-                  ),
-                ),
+                // Container(
+                //   color: const Color.fromARGB(98, 12, 13, 27),
+                //   padding: EdgeInsets.all(8),
+                //   child: ListTile(
+                //     leading: Icon(Icons.remove_red_eye_outlined, color: Colors.white),
+                //     title: Text('Voir les détails'.toUpperCase()),
+                //     onTap: () => Navigator.pop(sheetContext, 'view'),
+                //   ),
+                // ),
                 Container(
                   color: const Color.fromARGB(98, 12, 13, 27),
                   padding: EdgeInsets.all(8),
@@ -522,9 +531,13 @@ class _GaragePageState extends State<GaragePage> {
   }
 
   Future<void> _openDetails(Car car) async {
+    final sortedCars = _getDisplayedCars();
+    final initialIndex = sortedCars.indexWhere((item) => item.id == car.id);
+    if (initialIndex == -1) return;
+
     await Navigator.of(context).push<void>(
-      MaterialPageRoute(
-        builder: (_) => CarDetailPage(car: car, onPossessionChanged: (value) => _toggleOwnership(car.id, value), onRemove: () => _removeCar(car.id)),
+      _garagePageRoute<void>(
+        CarDetailPage(cars: sortedCars, initialIndex: initialIndex, onPossessionChanged: _toggleOwnership, onRemove: _removeCar),
       ),
     );
   }
@@ -546,6 +559,7 @@ class _GaragePageState extends State<GaragePage> {
     final acquiredCount = _cars.where((car) => car.possedee).length;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       floatingActionButton: FloatingActionButton(
         onPressed: filter,
         backgroundColor: Color(0xff23212e),
@@ -595,24 +609,25 @@ class _GarageCarCard extends StatelessWidget {
     required this.car,
     required this.isSaving,
     required this.onTap,
-    // required this.onLongPress,
+    required this.onLongPress,
     required this.onPossessionChanged,
   });
 
   final Car car;
   final bool isSaving;
   final VoidCallback onTap;
-  // final VoidCallback onLongPress;
+  final VoidCallback onLongPress;
   final ValueChanged<bool> onPossessionChanged;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       child: Container(
         margin: EdgeInsets.zero,
         clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(color: const Color.fromARGB(98, 12, 13, 27)),
+        decoration: BoxDecoration(color: const Color.fromARGB(100, 12, 13, 27)),
         child: Column(
           children: [
             Expanded(
