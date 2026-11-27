@@ -34,4 +34,19 @@ void main() {
     expect(filters.sortBy, 'ownership');
     expect(filters.groupBy, isNull);
   });
+
+  test('clears only the saved garage', () async {
+    SharedPreferences.setMockInitialValues({'garage_cars': '[{"id":"car"}]', 'garage_filters': '{"sortBy":"brand","groupBy":null}'});
+    final storage = CarStorage();
+
+    await storage.clearCars();
+
+    final preferences = await SharedPreferences.getInstance();
+    expect(preferences.getString('garage_cars'), isNull);
+    expect(preferences.getString('garage_filters'), '{"sortBy":"brand","groupBy":null}');
+  });
+
+  test('clearing an already empty garage is harmless', () async {
+    await CarStorage().clearCars();
+  });
 }

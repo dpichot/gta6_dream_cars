@@ -15,7 +15,8 @@ const carCatalog = <Car>[
     classementRoute: 847,
     classementTerre: 292,
     stats: CarStats(vitesse: 9.2, acceleration: 8.9, adherenceAsphalte: 7.5, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Thrax
+    unique: true, // base:
+    modeleBase: "Thrax",
   ),
   Car(
     id: "seaspray-emerus",
@@ -31,7 +32,8 @@ const carCatalog = <Car>[
     classementRoute: 863,
     classementTerre: 213,
     stats: CarStats(vitesse: 8.9, acceleration: 8.6, adherenceAsphalte: 8.4, adherenceTerre: 3.4, robustesse: 3.6),
-    unique: true, // base: Emerus
+    unique: true, // base:
+    modeleBase: "Emerus",
   ),
   Car(
     id: "honeycomb-emerus",
@@ -47,7 +49,8 @@ const carCatalog = <Car>[
     classementRoute: 862,
     classementTerre: 213,
     stats: CarStats(vitesse: 8.9, acceleration: 8.6, adherenceAsphalte: 8.4, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Emerus
+    unique: true, // base:
+    modeleBase: "Emerus",
   ),
   Car(
     id: "black-widow-emerus",
@@ -63,7 +66,8 @@ const carCatalog = <Car>[
     classementRoute: 863,
     classementTerre: 212,
     stats: CarStats(vitesse: 8.9, acceleration: 8.6, adherenceAsphalte: 8.4, adherenceTerre: 3.4, robustesse: 3.6),
-    unique: true, // base: Emerus
+    unique: true, // base:
+    modeleBase: "Emerus",
   ),
   Car(
     id: "thrax",
@@ -95,7 +99,8 @@ const carCatalog = <Car>[
     classementRoute: 811,
     classementTerre: 270,
     stats: CarStats(vitesse: 8.7, acceleration: 8.7, adherenceAsphalte: 7.0, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Itali RSX
+    unique: true, // base:
+    modeleBase: "Itali RSX",
   ),
   Car(
     id: "royal-ruby-emerus",
@@ -111,7 +116,8 @@ const carCatalog = <Car>[
     classementRoute: 852,
     classementTerre: 213,
     stats: CarStats(vitesse: 8.6, acceleration: 8.4, adherenceAsphalte: 8.4, adherenceTerre: 3.4, robustesse: 3.6),
-    unique: true, // base: Emerus
+    unique: true, // base:
+    modeleBase: "Emerus",
   ),
   Car(
     id: "dolce-vita-rsx",
@@ -127,7 +133,8 @@ const carCatalog = <Car>[
     classementRoute: 808,
     classementTerre: 270,
     stats: CarStats(vitesse: 8.6, acceleration: 8.7, adherenceAsphalte: 7.0, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Itali RSX
+    unique: true, // base:
+    modeleBase: "Itali RSX",
   ),
   Car(
     id: "dantes-vitello",
@@ -143,7 +150,8 @@ const carCatalog = <Car>[
     classementRoute: 873,
     classementTerre: 297,
     stats: CarStats(vitesse: 8.6, acceleration: 8.9, adherenceAsphalte: 8.6, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Vitello
+    unique: true, // base:
+    modeleBase: "Vitello",
   ),
   Car(
     id: "purple-drank-emerus",
@@ -159,7 +167,8 @@ const carCatalog = <Car>[
     classementRoute: 862,
     classementTerre: 157,
     stats: CarStats(vitesse: 8.5, acceleration: 8.4, adherenceAsphalte: 8.8, adherenceTerre: 2.8, robustesse: 3.0),
-    unique: true, // base: Emerus
+    unique: true, // base:
+    modeleBase: "Emerus",
   ),
   Car(
     id: "dragon-gate-furia",
@@ -175,7 +184,8 @@ const carCatalog = <Car>[
     classementRoute: 810,
     classementTerre: 239,
     stats: CarStats(vitesse: 8.5, acceleration: 8.6, adherenceAsphalte: 7.3, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Furia
+    unique: true, // base:
+    modeleBase: "Furia",
   ),
   Car(
     id: "class-act-comet",
@@ -191,7 +201,8 @@ const carCatalog = <Car>[
     classementRoute: 757,
     classementTerre: 296,
     stats: CarStats(vitesse: 8.5, acceleration: 8.4, adherenceAsphalte: 6.1, adherenceTerre: 4.0, robustesse: 3.0),
-    unique: true, // base: Comet '88
+    unique: true, // base:
+    modeleBase: "Comet '88",
   ),
   Car(
     id: "splattered-vitello",
@@ -207,7 +218,8 @@ const carCatalog = <Car>[
     classementRoute: 844,
     classementTerre: 296,
     stats: CarStats(vitesse: 8.4, acceleration: 8.6, adherenceAsphalte: 8.2, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Vitello
+    unique: true, // base:
+    modeleBase: "Vitello",
   ),
   Car(
     id: "tsunami-zorrusso",
@@ -223,7 +235,8 @@ const carCatalog = <Car>[
     classementRoute: 810,
     classementTerre: 302,
     stats: CarStats(vitesse: 8.3, acceleration: 8.6, adherenceAsphalte: 7.3, adherenceTerre: 3.8, robustesse: 4.0),
-    unique: true, // base: Zorrusso
+    unique: true, // base:
+    modeleBase: "Zorrusso",
   ),
   Car(
     id: "gold-rope-infernus",
@@ -239,7 +252,8 @@ const carCatalog = <Car>[
     classementRoute: 757,
     classementTerre: 240,
     stats: CarStats(vitesse: 8.3, acceleration: 8.0, adherenceAsphalte: 6.6, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Infernus '96
+    unique: true, // base:
+    modeleBase: "Infernus '96",
   ),
   Car(
     id: "emerus",
@@ -271,7 +285,8 @@ const carCatalog = <Car>[
     classementRoute: 761,
     classementTerre: 169,
     stats: CarStats(vitesse: 8.3, acceleration: 8.3, adherenceAsphalte: 6.4, adherenceTerre: 2.9, robustesse: 3.5),
-    unique: true, // base: Gauntlet Hellfire
+    unique: true, // base:
+    modeleBase: "Gauntlet Hellfire",
   ),
   Car(
     id: "vitello",
@@ -303,7 +318,8 @@ const carCatalog = <Car>[
     classementRoute: 753,
     classementTerre: 245,
     stats: CarStats(vitesse: 8.2, acceleration: 8.1, adherenceAsphalte: 6.4, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Coquette D10
+    unique: true, // base:
+    modeleBase: "Coquette D10",
   ),
   Car(
     id: "mojito-tempesta",
@@ -319,7 +335,8 @@ const carCatalog = <Car>[
     classementRoute: 807,
     classementTerre: 284,
     stats: CarStats(vitesse: 8.2, acceleration: 8.6, adherenceAsphalte: 7.3, adherenceTerre: 3.8, robustesse: 3.7),
-    unique: true, // base: Tempesta
+    unique: true, // base:
+    modeleBase: "Tempesta",
   ),
   Car(
     id: "lipgloss-vitello",
@@ -335,7 +352,8 @@ const carCatalog = <Car>[
     classementRoute: 832,
     classementTerre: 297,
     stats: CarStats(vitesse: 8.2, acceleration: 8.4, adherenceAsphalte: 8.2, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Vitello
+    unique: true, // base:
+    modeleBase: "Vitello",
   ),
   Car(
     id: "rauls-tempesta",
@@ -351,7 +369,8 @@ const carCatalog = <Car>[
     classementRoute: 761,
     classementTerre: 631,
     stats: CarStats(vitesse: 8.1, acceleration: 8.5, adherenceAsphalte: 6.3, adherenceTerre: 5.8, robustesse: 3.0),
-    unique: true, // base: Tempesta
+    unique: true, // base:
+    modeleBase: "Tempesta",
   ),
   Car(
     id: "burning-cypher",
@@ -367,7 +386,8 @@ const carCatalog = <Car>[
     classementRoute: 707,
     classementTerre: 124,
     stats: CarStats(vitesse: 8.0, acceleration: 8.3, adherenceAsphalte: 5.2, adherenceTerre: 2.4, robustesse: 3.0),
-    unique: true, // base: Cypher
+    unique: true, // base:
+    modeleBase: "Cypher",
   ),
   Car(
     id: "gauntlet-hellfire",
@@ -415,7 +435,9 @@ const carCatalog = <Car>[
     classementRoute: 723,
     classementTerre: 198,
     stats: CarStats(vitesse: 7.8, acceleration: 7.7, adherenceAsphalte: 6.3, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Mamba GT '64
+    unique: true, // base:
+    modeleBase: "Mamba GT '64",
+    dlc: "Edition ultime",
   ),
   Car(
     id: "copperheads-gauntlet",
@@ -431,7 +453,8 @@ const carCatalog = <Car>[
     classementRoute: 703,
     classementTerre: 324,
     stats: CarStats(vitesse: 7.8, acceleration: 7.8, adherenceAsphalte: 5.7, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Gauntlet Hellfire
+    unique: true, // base:
+    modeleBase: "Gauntlet Hellfire",
   ),
   Car(
     id: "big-cat-furia",
@@ -447,7 +470,8 @@ const carCatalog = <Car>[
     classementRoute: 781,
     classementTerre: 239,
     stats: CarStats(vitesse: 7.8, acceleration: 8.2, adherenceAsphalte: 7.3, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Furia
+    unique: true, // base:
+    modeleBase: "Furia",
   ),
   Car(
     id: "gentrifier-comet",
@@ -463,7 +487,8 @@ const carCatalog = <Car>[
     classementRoute: 776,
     classementTerre: 238,
     stats: CarStats(vitesse: 7.7, acceleration: 8.0, adherenceAsphalte: 7.5, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Comet S2
+    unique: true, // base:
+    modeleBase: "Comet S2",
   ),
   Car(
     id: "comet-s2",
@@ -495,7 +520,8 @@ const carCatalog = <Car>[
     classementRoute: 708,
     classementTerre: 283,
     stats: CarStats(vitesse: 7.7, acceleration: 7.1, adherenceAsphalte: 6.6, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Cheetah '95
+    unique: true, // base:
+    modeleBase: "Cheetah '95",
   ),
   Car(
     id: "police-tempesta",
@@ -511,7 +537,8 @@ const carCatalog = <Car>[
     classementRoute: 748,
     classementTerre: 284,
     stats: CarStats(vitesse: 7.6, acceleration: 7.8, adherenceAsphalte: 6.9, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Tempesta
+    unique: true, // base:
+    modeleBase: "Tempesta",
   ),
   Car(
     id: "tempesta",
@@ -543,7 +570,8 @@ const carCatalog = <Car>[
     classementRoute: 639,
     classementTerre: 278,
     stats: CarStats(vitesse: 7.6, acceleration: 7.5, adherenceAsphalte: 4.5, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Schafter S
+    unique: true, // base:
+    modeleBase: "Schafter S",
   ),
   Car(
     id: "gold-rush-tempesta",
@@ -559,7 +587,8 @@ const carCatalog = <Car>[
     classementRoute: 748,
     classementTerre: 284,
     stats: CarStats(vitesse: 7.6, acceleration: 7.8, adherenceAsphalte: 6.9, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Tempesta
+    unique: true, // base:
+    modeleBase: "Tempesta",
   ),
   Car(
     id: "burnished-alvino",
@@ -575,7 +604,8 @@ const carCatalog = <Car>[
     classementRoute: 804,
     classementTerre: 118,
     stats: CarStats(vitesse: 7.6, acceleration: 8.3, adherenceAsphalte: 7.9, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: Alvino V1
+    unique: true, // base:
+    modeleBase: "Alvino V1",
   ),
   Car(
     id: "zorrusso",
@@ -623,7 +653,8 @@ const carCatalog = <Car>[
     classementRoute: 757,
     classementTerre: 208,
     stats: CarStats(vitesse: 7.4, acceleration: 8.4, adherenceAsphalte: 6.7, adherenceTerre: 2.9, robustesse: 3.7),
-    unique: true, // base: Elegy '90
+    unique: true, // base:
+    modeleBase: "Elegy '90",
   ),
   Car(
     id: "emilios-lectro",
@@ -639,7 +670,8 @@ const carCatalog = <Car>[
     classementRoute: 774,
     classementTerre: 118,
     stats: CarStats(vitesse: 7.4, acceleration: 8.1, adherenceAsphalte: 7.5, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: Lectro
+    unique: true, // base:
+    modeleBase: "Lectro",
   ),
   Car(
     id: "bloodless-jugular",
@@ -655,7 +687,8 @@ const carCatalog = <Car>[
     classementRoute: 728,
     classementTerre: 146,
     stats: CarStats(vitesse: 7.4, acceleration: 8.2, adherenceAsphalte: 6.1, adherenceTerre: 2.6, robustesse: 3.0),
-    unique: true, // base: Jugular
+    unique: true, // base:
+    modeleBase: "Jugular",
   ),
   Car(
     id: "pixel-elegy",
@@ -671,7 +704,8 @@ const carCatalog = <Car>[
     classementRoute: 776,
     classementTerre: 150,
     stats: CarStats(vitesse: 7.3, acceleration: 8.5, adherenceAsphalte: 7.2, adherenceTerre: 2.3, robustesse: 3.0),
-    unique: true, // base: Elegy '90
+    unique: true, // base:
+    modeleBase: "Elegy '90",
   ),
   Car(
     id: "driveshaft-banshee",
@@ -687,7 +721,8 @@ const carCatalog = <Car>[
     classementRoute: 657,
     classementTerre: 743,
     stats: CarStats(vitesse: 7.3, acceleration: 7.4, adherenceAsphalte: 5.2, adherenceTerre: 6.9, robustesse: 3.4),
-    unique: true, // base: Banshee
+    unique: true, // base:
+    modeleBase: "Banshee",
   ),
   Car(
     id: "bourbon-windsor",
@@ -703,7 +738,8 @@ const carCatalog = <Car>[
     classementRoute: 607,
     classementTerre: 389,
     stats: CarStats(vitesse: 7.3, acceleration: 7.3, adherenceAsphalte: 4.0, adherenceTerre: 4.6, robustesse: 4.8),
-    unique: true, // base: Windsor Drop
+    unique: true, // base:
+    modeleBase: "Windsor Drop",
   ),
   Car(
     id: "penumbra-paul-walker-tribute",
@@ -719,7 +755,8 @@ const carCatalog = <Car>[
     classementRoute: 684,
     classementTerre: 90,
     stats: CarStats(vitesse: 7.2, acceleration: 7.6, adherenceAsphalte: 5.8, adherenceTerre: 1.9, robustesse: 3.0),
-    unique: true, // base: Penumbra FF '97
+    unique: true, // base:
+    modeleBase: "Penumbra FF '97",
   ),
   Car(
     id: "nightlight-schafter",
@@ -735,7 +772,8 @@ const carCatalog = <Car>[
     classementRoute: 698,
     classementTerre: 187,
     stats: CarStats(vitesse: 7.2, acceleration: 7.5, adherenceAsphalte: 6.2, adherenceTerre: 2.9, robustesse: 3.0),
-    unique: true, // base: Schafter S
+    unique: true, // base:
+    modeleBase: "Schafter S",
   ),
   Car(
     id: "enforcer-coquette",
@@ -751,7 +789,8 @@ const carCatalog = <Car>[
     classementRoute: 712,
     classementTerre: 238,
     stats: CarStats(vitesse: 7.2, acceleration: 7.6, adherenceAsphalte: 6.5, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Coquette D10
+    unique: true, // base:
+    modeleBase: "Coquette D10",
   ),
   Car(
     id: "bareback-cypher",
@@ -767,7 +806,8 @@ const carCatalog = <Car>[
     classementRoute: 656,
     classementTerre: 574,
     stats: CarStats(vitesse: 7.2, acceleration: 7.8, adherenceAsphalte: 4.9, adherenceTerre: 5.7, robustesse: 3.0),
-    unique: true, // base: Cypher
+    unique: true, // base:
+    modeleBase: "Cypher",
   ),
   Car(
     id: "twinstripe-vigero",
@@ -783,7 +823,8 @@ const carCatalog = <Car>[
     classementRoute: 656,
     classementTerre: 219,
     stats: CarStats(vitesse: 7.1, acceleration: 7.1, adherenceAsphalte: 5.6, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Vigero ZX Convertible
+    unique: true, // base:
+    modeleBase: "Vigero ZX Convertible",
   ),
   Car(
     id: "sfb-1000",
@@ -815,7 +856,8 @@ const carCatalog = <Car>[
     classementRoute: 669,
     classementTerre: 272,
     stats: CarStats(vitesse: 7.1, acceleration: 7.8, adherenceAsphalte: 5.2, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Cypher
+    unique: true, // base:
+    modeleBase: "Cypher",
   ),
   Car(
     id: "neon",
@@ -847,7 +889,8 @@ const carCatalog = <Car>[
     classementRoute: 796,
     classementTerre: 121,
     stats: CarStats(vitesse: 7.1, acceleration: 8.1, adherenceAsphalte: 8.1, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: SFB 1000
+    unique: true, // base:
+    modeleBase: "SFB 1000",
   ),
   Car(
     id: "infernus-classic",
@@ -879,7 +922,8 @@ const carCatalog = <Car>[
     classementRoute: 532,
     classementTerre: 114,
     stats: CarStats(vitesse: 7.1, acceleration: 7.0, adherenceAsphalte: 2.4, adherenceTerre: 2.2, robustesse: 3.7),
-    unique: true, // base: Elegy '90
+    unique: true, // base:
+    modeleBase: "Elegy '90",
   ),
   Car(
     id: "v-str",
@@ -911,7 +955,8 @@ const carCatalog = <Car>[
     classementRoute: 768,
     classementTerre: 120,
     stats: CarStats(vitesse: 7.0, acceleration: 8.0, adherenceAsphalte: 7.6, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: Carbon RS
+    unique: true, // base:
+    modeleBase: "Carbon RS",
   ),
   Car(
     id: "revival-kit-car",
@@ -927,7 +972,9 @@ const carCatalog = <Car>[
     classementRoute: 663,
     classementTerre: 286,
     stats: CarStats(vitesse: 7.0, acceleration: 7.4, adherenceAsphalte: 5.5, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Kit Car
+    unique: true, // base:
+    modeleBase: "Kit Car",
+    dlc: "Edition ultime",
   ),
   Car(
     id: "coquette-d10",
@@ -960,6 +1007,7 @@ const carCatalog = <Car>[
     classementTerre: 199,
     stats: CarStats(vitesse: 6.9, acceleration: 7.2, adherenceAsphalte: 6.3, adherenceTerre: 3.2, robustesse: 3.0),
     unique: false,
+    // dlc: "Edition ultime"
   ),
   Car(
     id: "chameleon-elegy",
@@ -975,7 +1023,8 @@ const carCatalog = <Car>[
     classementRoute: 652,
     classementTerre: 295,
     stats: CarStats(vitesse: 6.9, acceleration: 7.8, adherenceAsphalte: 4.8, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Elegy '90
+    unique: true, // base:
+    modeleBase: "Elegy '90",
   ),
   Car(
     id: "alvino-v1",
@@ -1007,7 +1056,8 @@ const carCatalog = <Car>[
     classementRoute: 541,
     classementTerre: 375,
     stats: CarStats(vitesse: 6.8, acceleration: 6.6, adherenceAsphalte: 3.3, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Coquette '64
+    unique: true, // base:
+    modeleBase: "Coquette '64",
   ),
   Car(
     id: "rampant-stallion",
@@ -1023,7 +1073,8 @@ const carCatalog = <Car>[
     classementRoute: 585,
     classementTerre: 229,
     stats: CarStats(vitesse: 6.8, acceleration: 7.2, adherenceAsphalte: 3.9, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Stallion '68
+    unique: true, // base:
+    modeleBase: "Stallion '68",
   ),
   Car(
     id: "charred-toros",
@@ -1039,7 +1090,8 @@ const carCatalog = <Car>[
     classementRoute: 623,
     classementTerre: 525,
     stats: CarStats(vitesse: 6.8, acceleration: 7.9, adherenceAsphalte: 4.1, adherenceTerre: 5.2, robustesse: 3.0),
-    unique: true, // base: Toros
+    unique: true, // base:
+    modeleBase: "Toros",
   ),
   Car(
     id: "schutzen",
@@ -1087,7 +1139,8 @@ const carCatalog = <Car>[
     classementRoute: 750,
     classementTerre: 120,
     stats: CarStats(vitesse: 6.7, acceleration: 7.7, adherenceAsphalte: 7.6, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: Carbon RS
+    unique: true, // base:
+    modeleBase: "Carbon RS",
   ),
   Car(
     id: "darkling-dominator",
@@ -1103,7 +1156,8 @@ const carCatalog = <Car>[
     classementRoute: 626,
     classementTerre: 280,
     stats: CarStats(vitesse: 6.7, acceleration: 7.3, adherenceAsphalte: 4.9, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Dominator ASP
+    unique: true, // base:
+    modeleBase: "Dominator ASP",
   ),
   Car(
     id: "carbon-rs",
@@ -1151,7 +1205,9 @@ const carCatalog = <Car>[
     classementRoute: 633,
     classementTerre: 350,
     stats: CarStats(vitesse: 6.6, acceleration: 5.9, adherenceAsphalte: 6.5, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Cheetah '95
+    unique: true, // base:
+    modeleBase: "Cheetah '95",
+    dlc: "Edition ultime",
   ),
   Car(
     id: "hornet-growler",
@@ -1167,7 +1223,8 @@ const carCatalog = <Car>[
     classementRoute: 719,
     classementTerre: 279,
     stats: CarStats(vitesse: 6.6, acceleration: 7.6, adherenceAsphalte: 7.0, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Growler
+    unique: true, // base:
+    modeleBase: "Growler",
   ),
   Car(
     id: "dwnplys-schutzen",
@@ -1183,7 +1240,8 @@ const carCatalog = <Car>[
     classementRoute: 656,
     classementTerre: 329,
     stats: CarStats(vitesse: 6.6, acceleration: 7.1, adherenceAsphalte: 5.8, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Schutzen
+    unique: true, // base:
+    modeleBase: "Schutzen",
   ),
   Car(
     id: "grotti-cheetah-classic",
@@ -1215,7 +1273,8 @@ const carCatalog = <Car>[
     classementRoute: 549,
     classementTerre: 369,
     stats: CarStats(vitesse: 6.6, acceleration: 6.7, adherenceAsphalte: 3.5, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Picador '72
+    unique: true, // base:
+    modeleBase: "Picador '72",
   ),
   Car(
     id: "oubliette-coquette",
@@ -1231,7 +1290,8 @@ const carCatalog = <Car>[
     classementRoute: 525,
     classementTerre: 368,
     stats: CarStats(vitesse: 6.5, acceleration: 6.3, adherenceAsphalte: 3.3, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Coquette '64
+    unique: true, // base:
+    modeleBase: "Coquette '64",
   ),
   Car(
     id: "murica-dominator",
@@ -1247,7 +1307,8 @@ const carCatalog = <Car>[
     classementRoute: 635,
     classementTerre: 219,
     stats: CarStats(vitesse: 6.5, acceleration: 7.0, adherenceAsphalte: 5.5, adherenceTerre: 2.8, robustesse: 3.0),
-    unique: true, // base: Dominator ASP
+    unique: true, // base:
+    modeleBase: "Dominator ASP",
   ),
   Car(
     id: "jugular",
@@ -1279,7 +1340,8 @@ const carCatalog = <Car>[
     classementRoute: 603,
     classementTerre: 494,
     stats: CarStats(vitesse: 6.5, acceleration: 7.6, adherenceAsphalte: 3.9, adherenceTerre: 5.0, robustesse: 3.0),
-    unique: true, // base: Dubsta
+    unique: true, // base:
+    modeleBase: "Dubsta",
   ),
   Car(
     id: "firebug-dominator",
@@ -1295,7 +1357,8 @@ const carCatalog = <Car>[
     classementRoute: 632,
     classementTerre: 305,
     stats: CarStats(vitesse: 6.5, acceleration: 7.2, adherenceAsphalte: 5.2, adherenceTerre: 4.1, robustesse: 3.0),
-    unique: true, // base: Dominator
+    unique: true, // base:
+    modeleBase: "Dominator",
   ),
   Car(
     id: "cypher",
@@ -1343,7 +1406,8 @@ const carCatalog = <Car>[
     classementRoute: 607,
     classementTerre: 279,
     stats: CarStats(vitesse: 6.4, acceleration: 7.0, adherenceAsphalte: 4.9, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Dominator ASP
+    unique: true, // base:
+    modeleBase: "Dominator ASP",
   ),
   Car(
     id: "revenant-gauntlet",
@@ -1359,7 +1423,8 @@ const carCatalog = <Car>[
     classementRoute: 532,
     classementTerre: 270,
     stats: CarStats(vitesse: 6.3, acceleration: 6.2, adherenceAsphalte: 3.7, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Gauntlet Custom '69
+    unique: true, // base:
+    modeleBase: "Gauntlet Custom '69",
   ),
   Car(
     id: "emancipator-stallion",
@@ -1375,7 +1440,8 @@ const carCatalog = <Car>[
     classementRoute: 541,
     classementTerre: 364,
     stats: CarStats(vitesse: 6.3, acceleration: 6.4, adherenceAsphalte: 3.8, adherenceTerre: 4.5, robustesse: 5.0),
-    unique: true, // base: Stallion '68
+    unique: true, // base:
+    modeleBase: "Stallion '68",
   ),
   Car(
     id: "driveshaft-gauntlet",
@@ -1391,7 +1457,8 @@ const carCatalog = <Car>[
     classementRoute: 532,
     classementTerre: 272,
     stats: CarStats(vitesse: 6.3, acceleration: 6.3, adherenceAsphalte: 3.7, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Gauntlet Custom '69
+    unique: true, // base:
+    modeleBase: "Gauntlet Custom '69",
   ),
   Car(
     id: "dinka-double-t",
@@ -1439,7 +1506,8 @@ const carCatalog = <Car>[
     classementRoute: 701,
     classementTerre: 119,
     stats: CarStats(vitesse: 6.3, acceleration: 7.7, adherenceAsphalte: 6.5, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: FCR 1000
+    unique: true, // base:
+    modeleBase: "FCR 1000",
   ),
   Car(
     id: "crushed-velvet-double-t",
@@ -1455,7 +1523,8 @@ const carCatalog = <Car>[
     classementRoute: 744,
     classementTerre: 120,
     stats: CarStats(vitesse: 6.3, acceleration: 7.9, adherenceAsphalte: 7.4, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: Double-T
+    unique: true, // base:
+    modeleBase: "Double-T",
   ),
   Car(
     id: "grotti-carbonizzare",
@@ -1487,7 +1556,8 @@ const carCatalog = <Car>[
     classementRoute: 637,
     classementTerre: 155,
     stats: CarStats(vitesse: 6.3, acceleration: 6.9, adherenceAsphalte: 5.7, adherenceTerre: 2.6, robustesse: 3.0),
-    unique: true, // base: Penumbra FF '97
+    unique: true, // base:
+    modeleBase: "Penumbra FF '97",
   ),
   Car(
     id: "queen-bee-paragon",
@@ -1503,7 +1573,8 @@ const carCatalog = <Car>[
     classementRoute: 654,
     classementTerre: 316,
     stats: CarStats(vitesse: 6.2, acceleration: 7.2, adherenceAsphalte: 5.9, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Paragon
+    unique: true, // base:
+    modeleBase: "Paragon",
   ),
   Car(
     id: "paragon-r",
@@ -1535,7 +1606,8 @@ const carCatalog = <Car>[
     classementRoute: 581,
     classementTerre: 416,
     stats: CarStats(vitesse: 6.2, acceleration: 7.2, adherenceAsphalte: 4.0, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Dubsta
+    unique: true, // base:
+    modeleBase: "Dubsta",
   ),
   Car(
     id: "buttermilk-comet-retro",
@@ -1551,7 +1623,8 @@ const carCatalog = <Car>[
     classementRoute: 625,
     classementTerre: 379,
     stats: CarStats(vitesse: 6.2, acceleration: 6.4, adherenceAsphalte: 6.1, adherenceTerre: 4.6, robustesse: 3.0),
-    unique: true, // base: Comet '88
+    unique: true, // base:
+    modeleBase: "Comet '88",
   ),
   Car(
     id: "bloodbath-phoenix",
@@ -1567,7 +1640,8 @@ const carCatalog = <Car>[
     classementRoute: 560,
     classementTerre: 402,
     stats: CarStats(vitesse: 6.2, acceleration: 6.7, adherenceAsphalte: 3.9, adherenceTerre: 4.8, robustesse: 3.0),
-    unique: true, // base: Phoenix '77
+    unique: true, // base:
+    modeleBase: "Phoenix '77",
   ),
   Car(
     id: "driveshaft-sovereign",
@@ -1583,7 +1657,8 @@ const carCatalog = <Car>[
     classementRoute: 615,
     classementTerre: 202,
     stats: CarStats(vitesse: 6.1, acceleration: 6.4, adherenceAsphalte: 5.8, adherenceTerre: 3.3, robustesse: 4.0),
-    unique: true, // base: Sovereign 107
+    unique: true, // base:
+    modeleBase: "Sovereign 107",
   ),
   Car(
     id: "coquette",
@@ -1663,7 +1738,8 @@ const carCatalog = <Car>[
     classementRoute: 499,
     classementTerre: 333,
     stats: CarStats(vitesse: 6.0, acceleration: 5.8, adherenceAsphalte: 3.4, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Picador '72
+    unique: true, // base:
+    modeleBase: "Picador '72",
   ),
   Car(
     id: "schafter-v12",
@@ -1695,7 +1771,8 @@ const carCatalog = <Car>[
     classementRoute: 544,
     classementTerre: 208,
     stats: CarStats(vitesse: 6.0, acceleration: 6.6, adherenceAsphalte: 3.8, adherenceTerre: 2.5, robustesse: 3.0),
-    unique: true, // base: Chino '65
+    unique: true, // base:
+    modeleBase: "Chino '65",
   ),
   Car(
     id: "lustrous-toros",
@@ -1711,7 +1788,8 @@ const carCatalog = <Car>[
     classementRoute: 604,
     classementTerre: 396,
     stats: CarStats(vitesse: 6.0, acceleration: 7.1, adherenceAsphalte: 4.8, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Toros
+    unique: true, // base:
+    modeleBase: "Toros",
   ),
   Car(
     id: "gold-scarab-windsor",
@@ -1727,7 +1805,8 @@ const carCatalog = <Car>[
     classementRoute: 588,
     classementTerre: 369,
     stats: CarStats(vitesse: 6.0, acceleration: 6.9, adherenceAsphalte: 4.6, adherenceTerre: 4.3, robustesse: 3.0),
-    unique: true, // base: Windsor Drop
+    unique: true, // base:
+    modeleBase: "Windsor Drop",
   ),
   Car(
     id: "gilf-windsor",
@@ -1743,7 +1822,8 @@ const carCatalog = <Car>[
     classementRoute: 589,
     classementTerre: 372,
     stats: CarStats(vitesse: 6.0, acceleration: 6.9, adherenceAsphalte: 4.6, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Windsor Drop
+    unique: true, // base:
+    modeleBase: "Windsor Drop",
   ),
   Car(
     id: "cherry-bomb-chino",
@@ -1759,7 +1839,8 @@ const carCatalog = <Car>[
     classementRoute: 537,
     classementTerre: 357,
     stats: CarStats(vitesse: 6.0, acceleration: 6.6, adherenceAsphalte: 3.6, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Chino '65
+    unique: true, // base:
+    modeleBase: "Chino '65",
   ),
   Car(
     id: "banshee",
@@ -1791,7 +1872,8 @@ const carCatalog = <Car>[
     classementRoute: 512,
     classementTerre: 702,
     stats: CarStats(vitesse: 6.0, acceleration: 6.4, adherenceAsphalte: 3.2, adherenceTerre: 6.9, robustesse: 3.7),
-    unique: true, // base: Stallion '68
+    unique: true, // base:
+    modeleBase: "Stallion '68",
   ),
   Car(
     id: "turbo-ruiner",
@@ -1807,7 +1889,8 @@ const carCatalog = <Car>[
     classementRoute: 534,
     classementTerre: 376,
     stats: CarStats(vitesse: 5.9, acceleration: 6.4, adherenceAsphalte: 3.8, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Ruiner '82
+    unique: true, // base:
+    modeleBase: "Ruiner '82",
   ),
   Car(
     id: "smuggler-caracara",
@@ -1823,7 +1906,8 @@ const carCatalog = <Car>[
     classementRoute: 537,
     classementTerre: 814,
     stats: CarStats(vitesse: 5.9, acceleration: 7.3, adherenceAsphalte: 3.0, adherenceTerre: 7.6, robustesse: 4.2),
-    unique: true, // base: Caracara 4x4
+    unique: true, // base:
+    modeleBase: "Caracara 4x4",
   ),
   Car(
     id: "rauls-coquette-classic",
@@ -1839,7 +1923,8 @@ const carCatalog = <Car>[
     classementRoute: 492,
     classementTerre: 362,
     stats: CarStats(vitesse: 5.9, acceleration: 5.8, adherenceAsphalte: 3.3, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Coquette '64
+    unique: true, // base:
+    modeleBase: "Coquette '64",
   ),
   Car(
     id: "fcr-1000",
@@ -1871,7 +1956,8 @@ const carCatalog = <Car>[
     classementRoute: 577,
     classementTerre: 383,
     stats: CarStats(vitesse: 5.9, acceleration: 6.8, adherenceAsphalte: 4.5, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Jubilee
+    unique: true, // base:
+    modeleBase: "Jubilee",
   ),
   Car(
     id: "coquette-64",
@@ -1903,7 +1989,8 @@ const carCatalog = <Car>[
     classementRoute: 681,
     classementTerre: 119,
     stats: CarStats(vitesse: 5.9, acceleration: 7.4, adherenceAsphalte: 6.5, adherenceTerre: 2.3, robustesse: 4.0),
-    unique: true, // base: FCR 1000
+    unique: true, // base:
+    modeleBase: "FCR 1000",
   ),
   Car(
     id: "blood-fever-sovereign",
@@ -1919,7 +2006,8 @@ const carCatalog = <Car>[
     classementRoute: 611,
     classementTerre: 199,
     stats: CarStats(vitesse: 5.9, acceleration: 6.3, adherenceAsphalte: 5.8, adherenceTerre: 3.3, robustesse: 4.0),
-    unique: true, // base: Sovereign 107
+    unique: true, // base:
+    modeleBase: "Sovereign 107",
   ),
   Car(
     id: "anarchist-dominator",
@@ -1935,7 +2023,8 @@ const carCatalog = <Car>[
     classementRoute: 539,
     classementTerre: 126,
     stats: CarStats(vitesse: 5.9, acceleration: 6.4, adherenceAsphalte: 3.9, adherenceTerre: 2.4, robustesse: 3.0),
-    unique: true, // base: Dominator '65
+    unique: true, // base:
+    modeleBase: "Dominator '65",
   ),
   Car(
     id: "soaring-phoenix",
@@ -1951,7 +2040,8 @@ const carCatalog = <Car>[
     classementRoute: 513,
     classementTerre: 275,
     stats: CarStats(vitesse: 5.8, acceleration: 6.3, adherenceAsphalte: 3.4, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Phoenix '77
+    unique: true, // base:
+    modeleBase: "Phoenix '77",
   ),
   Car(
     id: "pmp-700",
@@ -1983,7 +2073,8 @@ const carCatalog = <Car>[
     classementRoute: 506,
     classementTerre: 329,
     stats: CarStats(vitesse: 5.8, acceleration: 5.5, adherenceAsphalte: 4.0, adherenceTerre: 4.4, robustesse: 3.7),
-    unique: true, // base: Picador '72
+    unique: true, // base:
+    modeleBase: "Picador '72",
   ),
   Car(
     id: "verdant-buccaneer",
@@ -1999,7 +2090,8 @@ const carCatalog = <Car>[
     classementRoute: 501,
     classementTerre: 360,
     stats: CarStats(vitesse: 5.7, acceleration: 6.3, adherenceAsphalte: 3.2, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Buccaneer '65
+    unique: true, // base:
+    modeleBase: "Buccaneer '65",
   ),
   Car(
     id: "marthas-vamos",
@@ -2015,7 +2107,8 @@ const carCatalog = <Car>[
     classementRoute: 487,
     classementTerre: 318,
     stats: CarStats(vitesse: 5.7, acceleration: 5.8, adherenceAsphalte: 3.3, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Vamos '74
+    unique: true, // base:
+    modeleBase: "Vamos '74",
   ),
   Car(
     id: "malibu-zombie-bobber",
@@ -2031,7 +2124,8 @@ const carCatalog = <Car>[
     classementRoute: 598,
     classementTerre: 214,
     stats: CarStats(vitesse: 5.7, acceleration: 6.4, adherenceAsphalte: 5.5, adherenceTerre: 3.3, robustesse: 4.0),
-    unique: true, // base: Zombie Bobber
+    unique: true, // base:
+    modeleBase: "Zombie Bobber",
   ),
   Car(
     id: "esskey",
@@ -2095,7 +2189,8 @@ const carCatalog = <Car>[
     classementRoute: 614,
     classementTerre: 745,
     stats: CarStats(vitesse: 5.6, acceleration: 6.8, adherenceAsphalte: 5.7, adherenceTerre: 7.1, robustesse: 4.0),
-    unique: true, // base: Esskey
+    unique: true, // base:
+    modeleBase: "Esskey",
   ),
   Car(
     id: "searing-zombie-bobber",
@@ -2111,7 +2206,8 @@ const carCatalog = <Car>[
     classementRoute: 590,
     classementTerre: 213,
     stats: CarStats(vitesse: 5.6, acceleration: 6.3, adherenceAsphalte: 5.5, adherenceTerre: 3.3, robustesse: 4.0),
-    unique: true, // base: Zombie Bobber
+    unique: true, // base:
+    modeleBase: "Zombie Bobber",
   ),
   Car(
     id: "dominator",
@@ -2143,7 +2239,8 @@ const carCatalog = <Car>[
     classementRoute: 516,
     classementTerre: 310,
     stats: CarStats(vitesse: 5.6, acceleration: 6.0, adherenceAsphalte: 3.9, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Blista '85
+    unique: true, // base:
+    modeleBase: "Blista '85",
   ),
   Car(
     id: "stallion-68",
@@ -2223,7 +2320,8 @@ const carCatalog = <Car>[
     classementRoute: 599,
     classementTerre: 211,
     stats: CarStats(vitesse: 5.5, acceleration: 6.6, adherenceAsphalte: 5.5, adherenceTerre: 3.3, robustesse: 4.0),
-    unique: true, // base: Zombie Bobber
+    unique: true, // base:
+    modeleBase: "Zombie Bobber",
   ),
   Car(
     id: "elegy-retro-custom",
@@ -2255,7 +2353,8 @@ const carCatalog = <Car>[
     classementRoute: 515,
     classementTerre: 347,
     stats: CarStats(vitesse: 5.5, acceleration: 6.1, adherenceAsphalte: 3.8, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Hermes '50
+    unique: true, // base:
+    modeleBase: "Hermes '50",
   ),
   Car(
     id: "bullion-gauntlet",
@@ -2271,7 +2370,8 @@ const carCatalog = <Car>[
     classementRoute: 474,
     classementTerre: 334,
     stats: CarStats(vitesse: 5.5, acceleration: 5.3, adherenceAsphalte: 3.6, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Gauntlet Custom '69
+    unique: true, // base:
+    modeleBase: "Gauntlet Custom '69",
   ),
   Car(
     id: "buffalo-stx",
@@ -2303,7 +2403,8 @@ const carCatalog = <Car>[
     classementRoute: 616,
     classementTerre: 274,
     stats: CarStats(vitesse: 5.4, acceleration: 6.1, adherenceAsphalte: 6.5, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Growler
+    unique: true, // base:
+    modeleBase: "Growler",
   ),
   Car(
     id: "oxygen-zombie-bobber",
@@ -2319,7 +2420,8 @@ const carCatalog = <Car>[
     classementRoute: 585,
     classementTerre: 207,
     stats: CarStats(vitesse: 5.4, acceleration: 6.3, adherenceAsphalte: 5.5, adherenceTerre: 3.3, robustesse: 4.0),
-    unique: true, // base: Zombie Bobber
+    unique: true, // base:
+    modeleBase: "Zombie Bobber",
   ),
   Car(
     id: "jubilee",
@@ -2367,7 +2469,8 @@ const carCatalog = <Car>[
     classementRoute: 504,
     classementTerre: 315,
     stats: CarStats(vitesse: 5.4, acceleration: 5.8, adherenceAsphalte: 3.9, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Chavos XS
+    unique: true, // base:
+    modeleBase: "Chavos XS",
   ),
   Car(
     id: "cheshire-rebel",
@@ -2383,7 +2486,8 @@ const carCatalog = <Car>[
     classementRoute: 522,
     classementTerre: 428,
     stats: CarStats(vitesse: 5.4, acceleration: 5.9, adherenceAsphalte: 4.3, adherenceTerre: 5.4, robustesse: 5.0),
-    unique: true, // base: Rebel '84
+    unique: true, // base:
+    modeleBase: "Rebel '84",
   ),
   Car(
     id: "bubblegum-growler",
@@ -2399,7 +2503,8 @@ const carCatalog = <Car>[
     classementRoute: 616,
     classementTerre: 274,
     stats: CarStats(vitesse: 5.4, acceleration: 6.1, adherenceAsphalte: 6.5, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Growler
+    unique: true, // base:
+    modeleBase: "Growler",
   ),
   Car(
     id: "black-moth-kamacho",
@@ -2415,7 +2520,8 @@ const carCatalog = <Car>[
     classementRoute: 514,
     classementTerre: 814,
     stats: CarStats(vitesse: 5.4, acceleration: 6.9, adherenceAsphalte: 3.0, adherenceTerre: 8.3, robustesse: 3.7),
-    unique: true, // base: Kamacho
+    unique: true, // base:
+    modeleBase: "Kamacho",
   ),
   Car(
     id: "sandblasted-cliffhanger",
@@ -2431,7 +2537,8 @@ const carCatalog = <Car>[
     classementRoute: 574,
     classementTerre: 744,
     stats: CarStats(vitesse: 5.3, acceleration: 6.2, adherenceAsphalte: 5.4, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Cliffhanger '72
+    unique: true, // base:
+    modeleBase: "Cliffhanger '72",
   ),
   Car(
     id: "pink-licorice-astron",
@@ -2447,7 +2554,8 @@ const carCatalog = <Car>[
     classementRoute: 577,
     classementTerre: 353,
     stats: CarStats(vitesse: 5.3, acceleration: 6.5, adherenceAsphalte: 5.1, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Astron
+    unique: true, // base:
+    modeleBase: "Astron",
   ),
   Car(
     id: "penumbra",
@@ -2479,7 +2587,8 @@ const carCatalog = <Car>[
     classementRoute: 512,
     classementTerre: 331,
     stats: CarStats(vitesse: 5.3, acceleration: 5.7, adherenceAsphalte: 4.2, adherenceTerre: 4.3, robustesse: 3.0),
-    unique: true, // base: Penumbra
+    unique: true, // base:
+    modeleBase: "Penumbra",
   ),
   Car(
     id: "fr36",
@@ -2511,7 +2620,8 @@ const carCatalog = <Car>[
     classementRoute: 540,
     classementTerre: 439,
     stats: CarStats(vitesse: 5.3, acceleration: 6.4, adherenceAsphalte: 4.2, adherenceTerre: 5.0, robustesse: 3.0),
-    unique: true, // base: Baller ST-D
+    unique: true, // base:
+    modeleBase: "Baller ST-D",
   ),
   Car(
     id: "baller-st-d",
@@ -2575,7 +2685,8 @@ const carCatalog = <Car>[
     classementRoute: 508,
     classementTerre: 765,
     stats: CarStats(vitesse: 5.2, acceleration: 6.2, adherenceAsphalte: 3.7, adherenceTerre: 7.9, robustesse: 3.0),
-    unique: true, // base: Injection '73
+    unique: true, // base:
+    modeleBase: "Injection '73",
   ),
   Car(
     id: "pacific-manchez",
@@ -2591,7 +2702,8 @@ const carCatalog = <Car>[
     classementRoute: 616,
     classementTerre: 134,
     stats: CarStats(vitesse: 5.2, acceleration: 7.5, adherenceAsphalte: 5.2, adherenceTerre: 2.5, robustesse: 4.0),
-    unique: true, // base: Manchez
+    unique: true, // base:
+    modeleBase: "Manchez",
   ),
   Car(
     id: "chavos-xs",
@@ -2655,7 +2767,8 @@ const carCatalog = <Car>[
     classementRoute: 440,
     classementTerre: 313,
     stats: CarStats(vitesse: 5.1, acceleration: 4.8, adherenceAsphalte: 3.4, adherenceTerre: 4.4, robustesse: 3.0),
-    unique: true, // base: Picador '72
+    unique: true, // base:
+    modeleBase: "Picador '72",
   ),
   Car(
     id: "princess-jubilee",
@@ -2671,7 +2784,8 @@ const carCatalog = <Car>[
     classementRoute: 512,
     classementTerre: 663,
     stats: CarStats(vitesse: 5.1, acceleration: 6.0, adherenceAsphalte: 4.1, adherenceTerre: 6.7, robustesse: 3.0),
-    unique: true, // base: Jubilee
+    unique: true, // base:
+    modeleBase: "Jubilee",
   ),
   Car(
     id: "pink-sunset-baller",
@@ -2687,7 +2801,8 @@ const carCatalog = <Car>[
     classementRoute: 541,
     classementTerre: 353,
     stats: CarStats(vitesse: 5.1, acceleration: 6.2, adherenceAsphalte: 4.6, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Baller
+    unique: true, // base:
+    modeleBase: "Baller",
   ),
   Car(
     id: "picador-72",
@@ -2735,7 +2850,8 @@ const carCatalog = <Car>[
     classementRoute: 450,
     classementTerre: 331,
     stats: CarStats(vitesse: 5.1, acceleration: 5.3, adherenceAsphalte: 3.2, adherenceTerre: 4.6, robustesse: 3.0),
-    unique: true, // base: DeVanity '59
+    unique: true, // base:
+    modeleBase: "DeVanity '59",
   ),
   Car(
     id: "dominator-65",
@@ -2769,6 +2885,7 @@ const carCatalog = <Car>[
     stats: CarStats(vitesse: 5.1, acceleration: 5.2, adherenceAsphalte: 3.7, adherenceTerre: 4.5, robustesse: 3.0),
     unique: false,
   ),
+
   Car(
     id: "born-free-deviant",
     nom: "Born Free Deviant",
@@ -2783,7 +2900,9 @@ const carCatalog = <Car>[
     classementRoute: 476,
     classementTerre: 330,
     stats: CarStats(vitesse: 5.1, acceleration: 5.3, adherenceAsphalte: 3.8, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Deviant '72
+    unique: true, // base:
+    dlc: "Edition ultime",
+    modeleBase: "Deviant '72",
   ),
   Car(
     id: "baller",
@@ -2815,7 +2934,9 @@ const carCatalog = <Car>[
     classementRoute: 472,
     classementTerre: 336,
     stats: CarStats(vitesse: 5.1, acceleration: 5.8, adherenceAsphalte: 3.3, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Transgressor '67
+    unique: true, // base:
+    modeleBase: "Transgressor '67",
+    dlc: "Edition ultime",
   ),
   Car(
     id: "alpha-bison",
@@ -2831,7 +2952,8 @@ const carCatalog = <Car>[
     classementRoute: 494,
     classementTerre: 771,
     stats: CarStats(vitesse: 5.1, acceleration: 6.8, adherenceAsphalte: 2.7, adherenceTerre: 7.2, robustesse: 3.7),
-    unique: true, // base: Bison 1800
+    unique: true, // base:
+    modeleBase: "Bison 1800",
   ),
   Car(
     id: "truth-and-justice-caracara",
@@ -2847,7 +2969,8 @@ const carCatalog = <Car>[
     classementRoute: 467,
     classementTerre: 777,
     stats: CarStats(vitesse: 5.0, acceleration: 6.1, adherenceAsphalte: 2.9, adherenceTerre: 8.4, robustesse: 6.3),
-    unique: true, // base: Caracara 4x4
+    unique: true, // base:
+    modeleBase: "Caracara 4x4",
   ),
   Car(
     id: "sugoi",
@@ -2879,7 +3002,8 @@ const carCatalog = <Car>[
     classementRoute: 603,
     classementTerre: 129,
     stats: CarStats(vitesse: 5.0, acceleration: 7.3, adherenceAsphalte: 5.2, adherenceTerre: 2.4, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "pharaoh-sanchez",
@@ -2895,7 +3019,8 @@ const carCatalog = <Car>[
     classementRoute: 603,
     classementTerre: 129,
     stats: CarStats(vitesse: 5.0, acceleration: 7.3, adherenceAsphalte: 5.2, adherenceTerre: 2.4, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "injection-73",
@@ -2927,7 +3052,8 @@ const carCatalog = <Car>[
     classementRoute: 489,
     classementTerre: 727,
     stats: CarStats(vitesse: 5.0, acceleration: 6.2, adherenceAsphalte: 3.3, adherenceTerre: 7.2, robustesse: 5.4),
-    unique: true, // base: Kamacho
+    unique: true, // base:
+    modeleBase: "Kamacho",
   ),
   Car(
     id: "feroci-98",
@@ -2959,7 +3085,7 @@ const carCatalog = <Car>[
     classementRoute: 493,
     classementTerre: 672,
     stats: CarStats(vitesse: 5.0, acceleration: 6.1, adherenceAsphalte: 3.5, adherenceTerre: 6.7, robustesse: 3.0),
-    unique: true, // base: Dominator '65
+    unique: false,
   ),
   Car(
     id: "citrus-ganado",
@@ -2975,7 +3101,8 @@ const carCatalog = <Car>[
     classementRoute: 483,
     classementTerre: 263,
     stats: CarStats(vitesse: 5.0, acceleration: 5.7, adherenceAsphalte: 3.6, adherenceTerre: 3.9, robustesse: 3.0),
-    unique: true, // base: Ganado '70
+    unique: true, // base:
+    modeleBase: "Ganado '70",
   ),
   Car(
     id: "blazin-phoenix",
@@ -2991,7 +3118,8 @@ const carCatalog = <Car>[
     classementRoute: 464,
     classementTerre: 259,
     stats: CarStats(vitesse: 5.0, acceleration: 5.5, adherenceAsphalte: 3.4, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Phoenix '77
+    unique: true, // base:
+    modeleBase: "Phoenix '77",
   ),
   Car(
     id: "wymans-dominator-buggy",
@@ -3007,7 +3135,9 @@ const carCatalog = <Car>[
     classementRoute: 480,
     classementTerre: 732,
     stats: CarStats(vitesse: 4.9, acceleration: 6.0, adherenceAsphalte: 3.3, adherenceTerre: 7.3, robustesse: 3.0),
-    unique: true, // base: Dominator Buggy '67
+    unique: true, // base:
+    modeleBase: "Dominator Buggy '67",
+    dlc: "Edition ultime",
   ),
   Car(
     id: "trash-rebel",
@@ -3023,7 +3153,8 @@ const carCatalog = <Car>[
     classementRoute: 489,
     classementTerre: 389,
     stats: CarStats(vitesse: 4.9, acceleration: 5.3, adherenceAsphalte: 4.3, adherenceTerre: 5.3, robustesse: 4.7),
-    unique: true, // base: Rebel '84
+    unique: true, // base:
+    modeleBase: "Rebel '84",
   ),
   Car(
     id: "karin-sultan",
@@ -3071,7 +3202,8 @@ const carCatalog = <Car>[
     classementRoute: 573,
     classementTerre: 186,
     stats: CarStats(vitesse: 4.9, acceleration: 5.9, adherenceAsphalte: 5.8, adherenceTerre: 3.1, robustesse: 4.0),
-    unique: true, // base: Sovereign 107
+    unique: true, // base:
+    modeleBase: "Sovereign 107",
   ),
   Car(
     id: "obsidian-sovereign",
@@ -3087,7 +3219,8 @@ const carCatalog = <Car>[
     classementRoute: 571,
     classementTerre: 186,
     stats: CarStats(vitesse: 4.9, acceleration: 5.8, adherenceAsphalte: 5.8, adherenceTerre: 3.1, robustesse: 4.0),
-    unique: true, // base: Sovereign 107
+    unique: true, // base:
+    modeleBase: "Sovereign 107",
   ),
   Car(
     id: "moses-sultan",
@@ -3103,7 +3236,8 @@ const carCatalog = <Car>[
     classementRoute: 533,
     classementTerre: 352,
     stats: CarStats(vitesse: 4.9, acceleration: 6.1, adherenceAsphalte: 4.6, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Sultan
+    unique: true, // base:
+    modeleBase: "Sultan",
   ),
   Car(
     id: "monarch-avarus",
@@ -3119,7 +3253,8 @@ const carCatalog = <Car>[
     classementRoute: 511,
     classementTerre: 169,
     stats: CarStats(vitesse: 4.9, acceleration: 5.4, adherenceAsphalte: 4.8, adherenceTerre: 3.1, robustesse: 4.0),
-    unique: true, // base: Avarus
+    unique: true, // base:
+    modeleBase: "Avarus",
   ),
   Car(
     id: "magma-cliffhanger",
@@ -3135,7 +3270,8 @@ const carCatalog = <Car>[
     classementRoute: 556,
     classementTerre: 728,
     stats: CarStats(vitesse: 4.9, acceleration: 5.9, adherenceAsphalte: 5.4, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Cliffhanger '72
+    unique: true, // base:
+    modeleBase: "Cliffhanger '72",
   ),
   Car(
     id: "jackals-caracara",
@@ -3151,7 +3287,8 @@ const carCatalog = <Car>[
     classementRoute: 473,
     classementTerre: 656,
     stats: CarStats(vitesse: 4.9, acceleration: 5.9, adherenceAsphalte: 3.3, adherenceTerre: 6.7, robustesse: 3.0),
-    unique: true, // base: Caracara 4x4
+    unique: true, // base:
+    modeleBase: "Caracara 4x4",
   ),
   Car(
     id: "getaway-grouse",
@@ -3167,7 +3304,8 @@ const carCatalog = <Car>[
     classementRoute: 463,
     classementTerre: 312,
     stats: CarStats(vitesse: 4.9, acceleration: 5.3, adherenceAsphalte: 3.7, adherenceTerre: 4.5, robustesse: 3.8),
-    unique: true, // base: Grouse '92
+    unique: true, // base:
+    modeleBase: "Grouse '92",
   ),
   Car(
     id: "cliffhanger-72",
@@ -3199,7 +3337,8 @@ const carCatalog = <Car>[
     classementRoute: 455,
     classementTerre: 378,
     stats: CarStats(vitesse: 4.9, acceleration: 5.2, adherenceAsphalte: 3.6, adherenceTerre: 5.1, robustesse: 3.0),
-    unique: true, // base: Walton '81
+    unique: true, // base:
+    modeleBase: "Walton '81",
   ),
   Car(
     id: "transient",
@@ -3231,7 +3370,8 @@ const carCatalog = <Car>[
     classementRoute: 475,
     classementTerre: 182,
     stats: CarStats(vitesse: 4.8, acceleration: 5.2, adherenceAsphalte: 4.0, adherenceTerre: 2.6, robustesse: 3.0),
-    unique: true, // base: Manana '77
+    unique: true, // base:
+    modeleBase: "Manana '77",
   ),
   Car(
     id: "tailgater-s",
@@ -3295,7 +3435,8 @@ const carCatalog = <Car>[
     classementRoute: 488,
     classementTerre: 292,
     stats: CarStats(vitesse: 4.8, acceleration: 5.4, adherenceAsphalte: 4.3, adherenceTerre: 4.1, robustesse: 3.0),
-    unique: true, // base: Apoc
+    unique: true, // base:
+    modeleBase: "Apoc",
   ),
   Car(
     id: "ghosts-exposed-parkland",
@@ -3311,7 +3452,8 @@ const carCatalog = <Car>[
     classementRoute: 489,
     classementTerre: 189,
     stats: CarStats(vitesse: 4.8, acceleration: 5.1, adherenceAsphalte: 4.6, adherenceTerre: 2.9, robustesse: 3.0),
-    unique: true, // base: Parkland '71
+    unique: true, // base:
+    modeleBase: "Parkland '71",
   ),
   Car(
     id: "dirt-rocket-zombie-bobber",
@@ -3327,7 +3469,8 @@ const carCatalog = <Car>[
     classementRoute: 534,
     classementTerre: 702,
     stats: CarStats(vitesse: 4.8, acceleration: 6.0, adherenceAsphalte: 4.8, adherenceTerre: 7.1, robustesse: 4.0),
-    unique: true, // base: Zombie Bobber
+    unique: true, // base:
+    modeleBase: "Zombie Bobber",
   ),
   Car(
     id: "beast-chino",
@@ -3343,7 +3486,8 @@ const carCatalog = <Car>[
     classementRoute: 447,
     classementTerre: 321,
     stats: CarStats(vitesse: 4.8, acceleration: 5.3, adherenceAsphalte: 3.3, adherenceTerre: 4.5, robustesse: 4.9),
-    unique: true, // base: Chino '65
+    unique: true, // base:
+    modeleBase: "Chino '65",
   ),
   Car(
     id: "zion",
@@ -3375,7 +3519,8 @@ const carCatalog = <Car>[
     classementRoute: 577,
     classementTerre: 771,
     stats: CarStats(vitesse: 4.7, acceleration: 6.8, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Manchez
+    unique: true, // base:
+    modeleBase: "Manchez",
   ),
   Car(
     id: "springtime-sungrazer",
@@ -3391,7 +3536,8 @@ const carCatalog = <Car>[
     classementRoute: 443,
     classementTerre: 307,
     stats: CarStats(vitesse: 4.7, acceleration: 5.2, adherenceAsphalte: 3.3, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Sungrazer '61
+    unique: true, // base:
+    modeleBase: "Sungrazer '61",
   ),
   Car(
     id: "smush-ganado",
@@ -3407,7 +3553,8 @@ const carCatalog = <Car>[
     classementRoute: 458,
     classementTerre: 330,
     stats: CarStats(vitesse: 4.7, acceleration: 5.3, adherenceAsphalte: 3.6, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Ganado '70
+    unique: true, // base:
+    modeleBase: "Ganado '70",
   ),
   Car(
     id: "sentinel-85",
@@ -3439,7 +3586,8 @@ const carCatalog = <Car>[
     classementRoute: 480,
     classementTerre: 399,
     stats: CarStats(vitesse: 4.7, acceleration: 5.5, adherenceAsphalte: 3.9, adherenceTerre: 5.0, robustesse: 3.0),
-    unique: true, // base: Dubsta
+    unique: true, // base:
+    modeleBase: "Dubsta",
   ),
   Car(
     id: "rebla-gts",
@@ -3471,7 +3619,8 @@ const carCatalog = <Car>[
     classementRoute: 503,
     classementTerre: 332,
     stats: CarStats(vitesse: 4.7, acceleration: 5.8, adherenceAsphalte: 4.2, adherenceTerre: 4.3, robustesse: 3.0),
-    unique: true, // base: Cavalcade XL
+    unique: true, // base:
+    modeleBase: "Cavalcade XL",
   ),
   Car(
     id: "lasso-90",
@@ -3503,7 +3652,8 @@ const carCatalog = <Car>[
     classementRoute: 479,
     classementTerre: 398,
     stats: CarStats(vitesse: 4.7, acceleration: 5.5, adherenceAsphalte: 3.9, adherenceTerre: 5.0, robustesse: 3.0),
-    unique: true, // base: Dubsta
+    unique: true, // base:
+    modeleBase: "Dubsta",
   ),
   Car(
     id: "ganado",
@@ -3567,7 +3717,8 @@ const carCatalog = <Car>[
     classementRoute: 503,
     classementTerre: 332,
     stats: CarStats(vitesse: 4.7, acceleration: 5.8, adherenceAsphalte: 4.2, adherenceTerre: 4.3, robustesse: 3.0),
-    unique: true, // base: Cavalcade XL
+    unique: true, // base:
+    modeleBase: "Cavalcade XL",
   ),
   Car(
     id: "audacity-sanchez",
@@ -3583,7 +3734,8 @@ const carCatalog = <Car>[
     classementRoute: 581,
     classementTerre: 774,
     stats: CarStats(vitesse: 4.7, acceleration: 6.9, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "arcturus-93",
@@ -3615,7 +3767,8 @@ const carCatalog = <Car>[
     classementRoute: 428,
     classementTerre: 257,
     stats: CarStats(vitesse: 4.6, acceleration: 4.6, adherenceAsphalte: 3.7, adherenceTerre: 3.9, robustesse: 3.8),
-    unique: true, // base: Grouse '92
+    unique: true, // base:
+    modeleBase: "Grouse '92",
   ),
   Car(
     id: "pink-gin-tulip",
@@ -3631,7 +3784,8 @@ const carCatalog = <Car>[
     classementRoute: 419,
     classementTerre: 332,
     stats: CarStats(vitesse: 4.6, acceleration: 5.4, adherenceAsphalte: 2.6, adherenceTerre: 4.8, robustesse: 3.0),
-    unique: true, // base: Tulip M-100 '78
+    unique: true, // base:
+    modeleBase: "Tulip M-100 '78",
   ),
   Car(
     id: "impaler-20",
@@ -3663,7 +3817,8 @@ const carCatalog = <Car>[
     classementRoute: 509,
     classementTerre: 175,
     stats: CarStats(vitesse: 4.6, acceleration: 5.5, adherenceAsphalte: 4.8, adherenceTerre: 3.1, robustesse: 4.0),
-    unique: true, // base: Avarus
+    unique: true, // base:
+    modeleBase: "Avarus",
   ),
   Car(
     id: "gravekeeper-walton",
@@ -3679,7 +3834,8 @@ const carCatalog = <Car>[
     classementRoute: 444,
     classementTerre: 328,
     stats: CarStats(vitesse: 4.6, acceleration: 4.4, adherenceAsphalte: 4.2, adherenceTerre: 5.0, robustesse: 5.5),
-    unique: true, // base: Walton '81
+    unique: true, // base:
+    modeleBase: "Walton '81",
   ),
   Car(
     id: "busted-cheater-rebel",
@@ -3695,7 +3851,8 @@ const carCatalog = <Car>[
     classementRoute: 460,
     classementTerre: 639,
     stats: CarStats(vitesse: 4.6, acceleration: 5.7, adherenceAsphalte: 3.4, adherenceTerre: 6.5, robustesse: 4.7),
-    unique: true, // base: Rebel '84
+    unique: true, // base:
+    modeleBase: "Rebel '84",
   ),
   Car(
     id: "brets-rebel",
@@ -3711,7 +3868,8 @@ const carCatalog = <Car>[
     classementRoute: 455,
     classementTerre: 713,
     stats: CarStats(vitesse: 4.6, acceleration: 5.7, adherenceAsphalte: 3.2, adherenceTerre: 7.3, robustesse: 4.5),
-    unique: true, // base: Rebel '84
+    unique: true, // base:
+    modeleBase: "Rebel '84",
   ),
   Car(
     id: "animus",
@@ -3823,7 +3981,8 @@ const carCatalog = <Car>[
     classementRoute: 437,
     classementTerre: 291,
     stats: CarStats(vitesse: 4.5, acceleration: 4.7, adherenceAsphalte: 3.8, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Blista '85
+    unique: true, // base:
+    modeleBase: "Blista '85",
   ),
   Car(
     id: "ruiner",
@@ -3855,7 +4014,8 @@ const carCatalog = <Car>[
     classementRoute: 450,
     classementTerre: 294,
     stats: CarStats(vitesse: 4.5, acceleration: 4.7, adherenceAsphalte: 4.2, adherenceTerre: 4.3, robustesse: 3.0),
-    unique: true, // base: Stanier G2
+    unique: true, // base:
+    modeleBase: "Stanier G2",
   ),
   Car(
     id: "impaler-sz",
@@ -3887,7 +4047,8 @@ const carCatalog = <Car>[
     classementRoute: 579,
     classementTerre: 108,
     stats: CarStats(vitesse: 4.5, acceleration: 6.0, adherenceAsphalte: 6.1, adherenceTerre: 2.2, robustesse: 4.0),
-    unique: true, // base: Nightblade
+    unique: true, // base:
+    modeleBase: "Nightblade",
   ),
   Car(
     id: "cotton-candy-devanity",
@@ -3903,7 +4064,8 @@ const carCatalog = <Car>[
     classementRoute: 413,
     classementTerre: 293,
     stats: CarStats(vitesse: 4.5, acceleration: 4.6, adherenceAsphalte: 3.2, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: DeVanity '59
+    unique: true, // base:
+    modeleBase: "DeVanity '59",
   ),
   Car(
     id: "vapid-contender",
@@ -4031,7 +4193,8 @@ const carCatalog = <Car>[
     classementRoute: 401,
     classementTerre: 662,
     stats: CarStats(vitesse: 4.4, acceleration: 4.7, adherenceAsphalte: 2.9, adherenceTerre: 7.3, robustesse: 3.0),
-    unique: true, // base: Yosemite '67
+    unique: true, // base:
+    modeleBase: "Yosemite '67",
   ),
   Car(
     id: "mesa",
@@ -4143,7 +4306,8 @@ const carCatalog = <Car>[
     classementRoute: 436,
     classementTerre: 619,
     stats: CarStats(vitesse: 4.3, acceleration: 5.3, adherenceAsphalte: 3.3, adherenceTerre: 6.7, robustesse: 3.7),
-    unique: true, // base: Caracara 4x4
+    unique: true, // base:
+    modeleBase: "Caracara 4x4",
   ),
   Car(
     id: "volkswagen-jetta",
@@ -4207,7 +4371,8 @@ const carCatalog = <Car>[
     classementRoute: 431,
     classementTerre: 296,
     stats: CarStats(vitesse: 4.3, acceleration: 5.0, adherenceAsphalte: 3.5, adherenceTerre: 4.3, robustesse: 3.0),
-    unique: true, // base: Akane
+    unique: true, // base:
+    modeleBase: "Akane",
   ),
   Car(
     id: "beach-candy-bobcat",
@@ -4223,7 +4388,8 @@ const carCatalog = <Car>[
     classementRoute: 414,
     classementTerre: 382,
     stats: CarStats(vitesse: 4.3, acceleration: 4.8, adherenceAsphalte: 3.2, adherenceTerre: 5.1, robustesse: 3.2),
-    unique: true, // base: Bobcat XL '84
+    unique: true, // base:
+    modeleBase: "Bobcat XL '84",
   ),
   Car(
     id: "aleutian",
@@ -4271,7 +4437,8 @@ const carCatalog = <Car>[
     classementRoute: 548,
     classementTerre: 739,
     stats: CarStats(vitesse: 4.2, acceleration: 6.3, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "jackals-sanchez",
@@ -4287,7 +4454,8 @@ const carCatalog = <Car>[
     classementRoute: 553,
     classementTerre: 747,
     stats: CarStats(vitesse: 4.2, acceleration: 6.5, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "flamingo-bobcat",
@@ -4303,7 +4471,8 @@ const carCatalog = <Car>[
     classementRoute: 406,
     classementTerre: 368,
     stats: CarStats(vitesse: 4.2, acceleration: 4.7, adherenceAsphalte: 3.2, adherenceTerre: 4.9, robustesse: 3.0),
-    unique: true, // base: Bobcat XL '84
+    unique: true, // base:
+    modeleBase: "Bobcat XL '84",
   ),
   Car(
     id: "caracara-4x4",
@@ -4431,7 +4600,8 @@ const carCatalog = <Car>[
     classementRoute: 386,
     classementTerre: 580,
     stats: CarStats(vitesse: 4.1, acceleration: 4.6, adherenceAsphalte: 2.8, adherenceTerre: 6.7, robustesse: 3.0),
-    unique: true, // base: Bison 900 '95
+    unique: true, // base:
+    modeleBase: "Bison 900 '95",
   ),
   Car(
     id: "driveshaft-youga",
@@ -4447,7 +4617,8 @@ const carCatalog = <Car>[
     classementRoute: 387,
     classementTerre: 199,
     stats: CarStats(vitesse: 4.1, acceleration: 4.2, adherenceAsphalte: 3.3, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Youga XL '79
+    unique: true, // base:
+    modeleBase: "Youga XL '79",
   ),
   Car(
     id: "bison-900-1995",
@@ -4463,7 +4634,8 @@ const carCatalog = <Car>[
     classementRoute: 386,
     classementTerre: 580,
     stats: CarStats(vitesse: 4.1, acceleration: 4.6, adherenceAsphalte: 2.8, adherenceTerre: 6.7, robustesse: 3.0),
-    unique: true, // base: Bison
+    unique: true, // base:
+    modeleBase: "Bison",
   ),
   Car(
     id: "sunrise-emperor",
@@ -4479,7 +4651,8 @@ const carCatalog = <Car>[
     classementRoute: 362,
     classementTerre: 244,
     stats: CarStats(vitesse: 4.0, acceleration: 4.1, adherenceAsphalte: 2.7, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Emperor '85
+    unique: true, // base:
+    modeleBase: "Emperor '85",
   ),
   Car(
     id: "rocket-slamvan",
@@ -4495,7 +4668,8 @@ const carCatalog = <Car>[
     classementRoute: 435,
     classementTerre: 211,
     stats: CarStats(vitesse: 4.0, acceleration: 5.5, adherenceAsphalte: 3.2, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Slamvan '56
+    unique: true, // base:
+    modeleBase: "Slamvan '56",
   ),
   Car(
     id: "red-hot-hustler",
@@ -4511,7 +4685,8 @@ const carCatalog = <Car>[
     classementRoute: 428,
     classementTerre: 215,
     stats: CarStats(vitesse: 4.0, acceleration: 5.3, adherenceAsphalte: 3.3, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Hustler '32
+    unique: true, // base:
+    modeleBase: "Hustler '32",
   ),
   Car(
     id: "reclaimer",
@@ -4575,7 +4750,8 @@ const carCatalog = <Car>[
     classementRoute: 391,
     classementTerre: 583,
     stats: CarStats(vitesse: 4.0, acceleration: 4.6, adherenceAsphalte: 3.0, adherenceTerre: 6.9, robustesse: 3.5),
-    unique: true, // base: Futo '85
+    unique: true, // base:
+    modeleBase: "Futo '85",
   ),
   Car(
     id: "granger-3600lx",
@@ -4607,7 +4783,8 @@ const carCatalog = <Car>[
     classementRoute: 447,
     classementTerre: 258,
     stats: CarStats(vitesse: 4.0, acceleration: 5.7, adherenceAsphalte: 3.3, adherenceTerre: 3.8, robustesse: 3.0),
-    unique: true, // base: Hustler '32
+    unique: true, // base:
+    modeleBase: "Hustler '32",
   ),
   Car(
     id: "bison-ii",
@@ -4623,7 +4800,8 @@ const carCatalog = <Car>[
     classementRoute: 406,
     classementTerre: 352,
     stats: CarStats(vitesse: 4.0, acceleration: 4.7, adherenceAsphalte: 3.2, adherenceTerre: 4.7, robustesse: 3.0),
-    unique: true, // base: Bison
+    unique: true, // base:
+    modeleBase: "Bison",
   ),
   Car(
     id: "allegiance-dorado",
@@ -4639,7 +4817,8 @@ const carCatalog = <Car>[
     classementRoute: 373,
     classementTerre: 314,
     stats: CarStats(vitesse: 4.0, acceleration: 3.8, adherenceAsphalte: 3.3, adherenceTerre: 4.7, robustesse: 3.0),
-    unique: true, // base: Dorado
+    unique: true, // base:
+    modeleBase: "Dorado",
   ),
   Car(
     id: "sunset-sanchez",
@@ -4655,7 +4834,8 @@ const carCatalog = <Car>[
     classementRoute: 523,
     classementTerre: 728,
     stats: CarStats(vitesse: 3.9, acceleration: 5.9, adherenceAsphalte: 5.2, adherenceTerre: 8.1, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "sanchez",
@@ -4687,7 +4867,8 @@ const carCatalog = <Car>[
     classementRoute: 521,
     classementTerre: 712,
     stats: CarStats(vitesse: 3.9, acceleration: 5.8, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Manchez
+    unique: true, // base:
+    modeleBase: "Manchez",
   ),
   Car(
     id: "manchez",
@@ -4719,7 +4900,8 @@ const carCatalog = <Car>[
     classementRoute: 524,
     classementTerre: 715,
     stats: CarStats(vitesse: 3.9, acceleration: 5.9, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "flipside-enduro",
@@ -4735,7 +4917,8 @@ const carCatalog = <Car>[
     classementRoute: 519,
     classementTerre: 706,
     stats: CarStats(vitesse: 3.9, acceleration: 5.7, adherenceAsphalte: 5.2, adherenceTerre: 7.6, robustesse: 4.0),
-    unique: true, // base: Enduro '72
+    unique: true, // base:
+    modeleBase: "Enduro '72",
   ),
   Car(
     id: "enduro",
@@ -4752,6 +4935,7 @@ const carCatalog = <Car>[
     classementTerre: 706,
     stats: CarStats(vitesse: 3.9, acceleration: 5.7, adherenceAsphalte: 5.2, adherenceTerre: 7.6, robustesse: 4.0),
     unique: false,
+    dlc: "Edition ultime",
   ),
   Car(
     id: "chino",
@@ -4783,7 +4967,8 @@ const carCatalog = <Car>[
     classementRoute: 497,
     classementTerre: 755,
     stats: CarStats(vitesse: 3.9, acceleration: 6.8, adherenceAsphalte: 3.5, adherenceTerre: 7.6, robustesse: 3.5),
-    unique: true, // base: Bandito '77
+    unique: true, // base:
+    modeleBase: "Bandito '77",
   ),
   Car(
     id: "berserker-sanchez",
@@ -4799,7 +4984,8 @@ const carCatalog = <Car>[
     classementRoute: 524,
     classementTerre: 715,
     stats: CarStats(vitesse: 3.9, acceleration: 5.9, adherenceAsphalte: 5.2, adherenceTerre: 7.7, robustesse: 4.0),
-    unique: true, // base: Sanchez
+    unique: true, // base:
+    modeleBase: "Sanchez",
   ),
   Car(
     id: "applesauce-bobcat",
@@ -4815,7 +5001,8 @@ const carCatalog = <Car>[
     classementRoute: 412,
     classementTerre: 321,
     stats: CarStats(vitesse: 3.9, acceleration: 5.1, adherenceAsphalte: 3.1, adherenceTerre: 4.6, robustesse: 3.0),
-    unique: true, // base: Bobcat 500 '55
+    unique: true, // base:
+    modeleBase: "Bobcat 500 '55",
   ),
   Car(
     id: "chrysler-lebaron-town-country",
@@ -4863,7 +5050,8 @@ const carCatalog = <Car>[
     classementRoute: 379,
     classementTerre: 274,
     stats: CarStats(vitesse: 3.8, acceleration: 3.8, adherenceAsphalte: 3.6, adherenceTerre: 4.2, robustesse: 4.7),
-    unique: true, // base: Walton '81
+    unique: true, // base:
+    modeleBase: "Walton '81",
   ),
   Car(
     id: "rebel",
@@ -4911,7 +5099,8 @@ const carCatalog = <Car>[
     classementRoute: 369,
     classementTerre: 209,
     stats: CarStats(vitesse: 3.8, acceleration: 3.8, adherenceAsphalte: 3.3, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Sungrazer '61
+    unique: true, // base:
+    modeleBase: "Sungrazer '61",
   ),
   Car(
     id: "fruit-outlet-walton",
@@ -4927,7 +5116,8 @@ const carCatalog = <Car>[
     classementRoute: 379,
     classementTerre: 274,
     stats: CarStats(vitesse: 3.8, acceleration: 3.8, adherenceAsphalte: 3.6, adherenceTerre: 4.2, robustesse: 3.0),
-    unique: true, // base: Walton '81
+    unique: true, // base:
+    modeleBase: "Walton '81",
   ),
   Car(
     id: "flower-child-woodland",
@@ -4943,7 +5133,8 @@ const carCatalog = <Car>[
     classementRoute: 352,
     classementTerre: 188,
     stats: CarStats(vitesse: 3.8, acceleration: 3.4, adherenceAsphalte: 3.3, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Woodland '85
+    unique: true, // base:
+    modeleBase: "Woodland '85",
   ),
   Car(
     id: "bison-900-monster-truck",
@@ -4975,7 +5166,8 @@ const carCatalog = <Car>[
     classementRoute: 383,
     classementTerre: 621,
     stats: CarStats(vitesse: 3.8, acceleration: 4.3, adherenceAsphalte: 3.2, adherenceTerre: 7.3, robustesse: 3.7),
-    unique: true, // base: Yosemite 1500
+    unique: true, // base:
+    modeleBase: "Yosemite 1500",
   ),
   Car(
     id: "yosemite-67",
@@ -5071,7 +5263,8 @@ const carCatalog = <Car>[
     classementRoute: 391,
     classementTerre: 645,
     stats: CarStats(vitesse: 3.7, acceleration: 4.9, adherenceAsphalte: 2.9, adherenceTerre: 7.2, robustesse: 4.2),
-    unique: true, // base: Sandking XT
+    unique: true, // base:
+    modeleBase: "Sandking XT",
   ),
   Car(
     id: "cereza-manana",
@@ -5087,7 +5280,8 @@ const carCatalog = <Car>[
     classementRoute: 364,
     classementTerre: 190,
     stats: CarStats(vitesse: 3.7, acceleration: 3.6, adherenceAsphalte: 3.4, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Manana '77
+    unique: true, // base:
+    modeleBase: "Manana '77",
   ),
   Car(
     id: "broken-oak-bobcat",
@@ -5103,7 +5297,8 @@ const carCatalog = <Car>[
     classementRoute: 397,
     classementTerre: 306,
     stats: CarStats(vitesse: 3.7, acceleration: 4.7, adherenceAsphalte: 3.1, adherenceTerre: 4.5, robustesse: 3.0),
-    unique: true, // base: Bobcat 500 '55
+    unique: true, // base:
+    modeleBase: "Bobcat 500 '55",
   ),
   Car(
     id: "mercury-comet-1st-gen",
@@ -5135,7 +5330,8 @@ const carCatalog = <Car>[
     classementRoute: 391,
     classementTerre: 206,
     stats: CarStats(vitesse: 3.6, acceleration: 4.2, adherenceAsphalte: 3.6, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Shifter
+    unique: true, // base:
+    modeleBase: "Shifter",
   ),
   Car(
     id: "ford-transit-cargo-4th-gen",
@@ -5199,7 +5395,8 @@ const carCatalog = <Car>[
     classementRoute: 459,
     classementTerre: 713,
     stats: CarStats(vitesse: 3.6, acceleration: 6.0, adherenceAsphalte: 3.5, adherenceTerre: 7.5, robustesse: 3.5),
-    unique: true, // base: Bandito '77
+    unique: true, // base:
+    modeleBase: "Bandito '77",
   ),
   Car(
     id: "midnight-sun-avarus",
@@ -5215,7 +5412,8 @@ const carCatalog = <Car>[
     classementRoute: 457,
     classementTerre: 146,
     stats: CarStats(vitesse: 3.6, acceleration: 4.7, adherenceAsphalte: 4.8, adherenceTerre: 2.7, robustesse: 4.0),
-    unique: true, // base: Avarus
+    unique: true, // base:
+    modeleBase: "Avarus",
   ),
   Car(
     id: "granger",
@@ -5247,7 +5445,8 @@ const carCatalog = <Car>[
     classementRoute: 457,
     classementTerre: 146,
     stats: CarStats(vitesse: 3.6, acceleration: 4.7, adherenceAsphalte: 4.8, adherenceTerre: 2.7, robustesse: 4.0),
-    unique: true, // base: Avarus
+    unique: true, // base:
+    modeleBase: "Avarus",
   ),
   Car(
     id: "beer-buggy-bandito",
@@ -5263,7 +5462,8 @@ const carCatalog = <Car>[
     classementRoute: 459,
     classementTerre: 714,
     stats: CarStats(vitesse: 3.6, acceleration: 6.0, adherenceAsphalte: 3.5, adherenceTerre: 7.6, robustesse: 3.5),
-    unique: true, // base: Bandito '77
+    unique: true, // base:
+    modeleBase: "Bandito '77",
   ),
   Car(
     id: "bandito-77",
@@ -5327,7 +5527,8 @@ const carCatalog = <Car>[
     classementRoute: 345,
     classementTerre: 516,
     stats: CarStats(vitesse: 3.5, acceleration: 3.6, adherenceAsphalte: 3.1, adherenceTerre: 6.6, robustesse: 3.0),
-    unique: true, // base: Rancher '86
+    unique: true, // base:
+    modeleBase: "Rancher '86",
   ),
   Car(
     id: "parkland-71",
@@ -5375,7 +5576,8 @@ const carCatalog = <Car>[
     classementRoute: 357,
     classementTerre: 615,
     stats: CarStats(vitesse: 3.5, acceleration: 4.3, adherenceAsphalte: 2.7, adherenceTerre: 7.1, robustesse: 3.2),
-    unique: true, // base: Marshall
+    unique: true, // base:
+    modeleBase: "Marshall",
   ),
   Car(
     id: "ram-3500",
@@ -5407,7 +5609,8 @@ const carCatalog = <Car>[
     classementRoute: 361,
     classementTerre: 203,
     stats: CarStats(vitesse: 3.4, acceleration: 3.8, adherenceAsphalte: 3.4, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Burrito '98
+    unique: true, // base:
+    modeleBase: "Burrito '98",
   ),
   Car(
     id: "speedo",
@@ -5439,7 +5642,8 @@ const carCatalog = <Car>[
     classementRoute: 439,
     classementTerre: 694,
     stats: CarStats(vitesse: 3.4, acceleration: 5.8, adherenceAsphalte: 3.3, adherenceTerre: 8.2, robustesse: 3.5),
-    unique: true, // base: Outlaw
+    unique: true, // base:
+    modeleBase: "Outlaw",
   ),
   Car(
     id: "burrito",
@@ -5471,7 +5675,8 @@ const carCatalog = <Car>[
     classementRoute: 361,
     classementTerre: 203,
     stats: CarStats(vitesse: 3.4, acceleration: 3.8, adherenceAsphalte: 3.4, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Burrito '98
+    unique: true, // base:
+    modeleBase: "Burrito '98",
   ),
   Car(
     id: "venomous-marshall",
@@ -5487,7 +5692,8 @@ const carCatalog = <Car>[
     classementRoute: 344,
     classementTerre: 600,
     stats: CarStats(vitesse: 3.3, acceleration: 4.1, adherenceAsphalte: 2.7, adherenceTerre: 7.1, robustesse: 3.0),
-    unique: true, // base: Marshall
+    unique: true, // base:
+    modeleBase: "Marshall",
   ),
   Car(
     id: "survivor-riata",
@@ -5503,7 +5709,9 @@ const carCatalog = <Car>[
     classementRoute: 362,
     classementTerre: 617,
     stats: CarStats(vitesse: 3.3, acceleration: 4.2, adherenceAsphalte: 3.0, adherenceTerre: 7.2, robustesse: 3.0),
-    unique: true, // base: Riata '70
+    unique: true, // base:
+    modeleBase: "Riata '70",
+    dlc: "Edition ultime",
   ),
   Car(
     id: "outlaw",
@@ -5535,7 +5743,8 @@ const carCatalog = <Car>[
     classementRoute: 426,
     classementTerre: 688,
     stats: CarStats(vitesse: 3.3, acceleration: 5.7, adherenceAsphalte: 3.1, adherenceTerre: 7.3, robustesse: 3.9),
-    unique: true, // base: Crawler '82
+    unique: true, // base:
+    modeleBase: "Crawler '82",
   ),
   Car(
     id: "marshall",
@@ -5567,7 +5776,8 @@ const carCatalog = <Car>[
     classementRoute: 334,
     classementTerre: 211,
     stats: CarStats(vitesse: 3.3, acceleration: 3.4, adherenceAsphalte: 3.2, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Slamvan '56
+    unique: true, // base:
+    modeleBase: "Slamvan '56",
   ),
   Car(
     id: "flower-powered-rancher",
@@ -5583,7 +5793,8 @@ const carCatalog = <Car>[
     classementRoute: 326,
     classementTerre: 390,
     stats: CarStats(vitesse: 3.3, acceleration: 3.2, adherenceAsphalte: 3.2, adherenceTerre: 5.4, robustesse: 3.0),
-    unique: true, // base: Rancher '86
+    unique: true, // base:
+    modeleBase: "Rancher '86",
   ),
   Car(
     id: "emperor",
@@ -5615,7 +5826,8 @@ const carCatalog = <Car>[
     classementRoute: 344,
     classementTerre: 600,
     stats: CarStats(vitesse: 3.3, acceleration: 4.1, adherenceAsphalte: 2.7, adherenceTerre: 7.1, robustesse: 3.0),
-    unique: true, // base: Marshall
+    unique: true, // base:
+    modeleBase: "Marshall",
   ),
   Car(
     id: "audacity-sandking",
@@ -5631,7 +5843,8 @@ const carCatalog = <Car>[
     classementRoute: 358,
     classementTerre: 544,
     stats: CarStats(vitesse: 3.3, acceleration: 4.1, adherenceAsphalte: 3.0, adherenceTerre: 6.7, robustesse: 3.2),
-    unique: true, // base: Sandking XL
+    unique: true, // base:
+    modeleBase: "Sandking XL",
   ),
   Car(
     id: "youga-xl-79",
@@ -5663,7 +5876,8 @@ const carCatalog = <Car>[
     classementRoute: 321,
     classementTerre: 194,
     stats: CarStats(vitesse: 3.2, acceleration: 3.1, adherenceAsphalte: 3.2, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Youga XL '79
+    unique: true, // base:
+    modeleBase: "Youga XL '79",
   ),
   Car(
     id: "slamvan",
@@ -5727,7 +5941,8 @@ const carCatalog = <Car>[
     classementRoute: 321,
     classementTerre: 194,
     stats: CarStats(vitesse: 3.2, acceleration: 3.1, adherenceAsphalte: 3.2, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Youga XL '79
+    unique: true, // base:
+    modeleBase: "Youga XL '79",
   ),
   Car(
     id: "circles-of-hell-youga",
@@ -5743,7 +5958,8 @@ const carCatalog = <Car>[
     classementRoute: 321,
     classementTerre: 194,
     stats: CarStats(vitesse: 3.2, acceleration: 3.1, adherenceAsphalte: 3.2, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Youga XL '79
+    unique: true, // base:
+    modeleBase: "Youga XL '79",
   ),
   Car(
     id: "acid-youga",
@@ -5759,7 +5975,8 @@ const carCatalog = <Car>[
     classementRoute: 321,
     classementTerre: 194,
     stats: CarStats(vitesse: 3.2, acceleration: 3.1, adherenceAsphalte: 3.2, adherenceTerre: 3.3, robustesse: 3.0),
-    unique: true, // base: Youga XL '79
+    unique: true, // base:
+    modeleBase: "Youga XL '79",
   ),
   Car(
     id: "mtl-wastelander",
@@ -5791,7 +6008,8 @@ const carCatalog = <Car>[
     classementRoute: 300,
     classementTerre: 175,
     stats: CarStats(vitesse: 3.1, acceleration: 2.6, adherenceAsphalte: 3.2, adherenceTerre: 3.1, robustesse: 3.0),
-    unique: true, // base: Youga '74
+    unique: true, // base:
+    modeleBase: "Youga '74",
   ),
   Car(
     id: "rancher",
@@ -5839,7 +6057,8 @@ const carCatalog = <Car>[
     classementRoute: 428,
     classementTerre: 286,
     stats: CarStats(vitesse: 3.1, acceleration: 5.6, adherenceAsphalte: 3.3, adherenceTerre: 4.2, robustesse: 4.0),
-    unique: true, // base: Verus
+    unique: true, // base:
+    modeleBase: "Verus",
   ),
   Car(
     id: "youga-classic",
@@ -5871,7 +6090,8 @@ const carCatalog = <Car>[
     classementRoute: 307,
     classementTerre: 547,
     stats: CarStats(vitesse: 3.0, acceleration: 3.1, adherenceAsphalte: 2.9, adherenceTerre: 7.2, robustesse: 3.0),
-    unique: true, // base: Rancher '86
+    unique: true, // base:
+    modeleBase: "Rancher '86",
   ),
   Car(
     id: "king-of-swing-youga",
@@ -5887,7 +6107,8 @@ const carCatalog = <Car>[
     classementRoute: 296,
     classementTerre: 173,
     stats: CarStats(vitesse: 3.0, acceleration: 2.6, adherenceAsphalte: 3.2, adherenceTerre: 3.1, robustesse: 3.0),
-    unique: true, // base: Youga '74
+    unique: true, // base:
+    modeleBase: "Youga '74",
   ),
   Car(
     id: "interdimensional-youga",
@@ -5903,7 +6124,8 @@ const carCatalog = <Car>[
     classementRoute: 296,
     classementTerre: 173,
     stats: CarStats(vitesse: 3.0, acceleration: 2.6, adherenceAsphalte: 3.2, adherenceTerre: 3.1, robustesse: 3.0),
-    unique: true, // base: Youga '74
+    unique: true, // base:
+    modeleBase: "Youga '74",
   ),
   Car(
     id: "bobcat-500-55",
@@ -5935,7 +6157,8 @@ const carCatalog = <Car>[
     classementRoute: 332,
     classementTerre: 181,
     stats: CarStats(vitesse: 2.9, acceleration: 3.1, adherenceAsphalte: 3.6, adherenceTerre: 3.1, robustesse: 3.0),
-    unique: true, // base: Shifter
+    unique: true, // base:
+    modeleBase: "Shifter",
   ),
   Car(
     id: "chevrolet-kodiak-gmc-topkick",
@@ -5983,7 +6206,8 @@ const carCatalog = <Car>[
     classementRoute: 414,
     classementTerre: 663,
     stats: CarStats(vitesse: 2.8, acceleration: 5.4, adherenceAsphalte: 3.4, adherenceTerre: 7.5, robustesse: 4.0),
-    unique: true, // base: Street Blazer
+    unique: true, // base:
+    modeleBase: "Street Blazer",
   ),
   Car(
     id: "blazer",
@@ -6031,7 +6255,8 @@ const carCatalog = <Car>[
     classementRoute: 417,
     classementTerre: 665,
     stats: CarStats(vitesse: 2.8, acceleration: 5.4, adherenceAsphalte: 3.4, adherenceTerre: 7.5, robustesse: 4.0),
-    unique: true, // base: Street Blazer
+    unique: true, // base:
+    modeleBase: "Street Blazer",
   ),
   Car(
     id: "azalea-street-blazer",
@@ -6047,7 +6272,8 @@ const carCatalog = <Car>[
     classementRoute: 417,
     classementTerre: 660,
     stats: CarStats(vitesse: 2.8, acceleration: 5.4, adherenceAsphalte: 3.4, adherenceTerre: 7.4, robustesse: 4.0),
-    unique: true, // base: Street Blazer
+    unique: true, // base:
+    modeleBase: "Street Blazer",
   ),
   Car(
     id: "jeep-scrambler-cj-8",
@@ -6207,7 +6433,8 @@ const carCatalog = <Car>[
     classementRoute: 275,
     classementTerre: 208,
     stats: CarStats(vitesse: 2.6, acceleration: 2.5, adherenceAsphalte: 2.9, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Reclaimer '70
+    unique: true, // base:
+    modeleBase: "Reclaimer '70",
   ),
   Car(
     id: "cherry-popper-boxville",
@@ -6223,7 +6450,8 @@ const carCatalog = <Car>[
     classementRoute: 276,
     classementTerre: 189,
     stats: CarStats(vitesse: 2.6, acceleration: 2.7, adherenceAsphalte: 2.7, adherenceTerre: 3.4, robustesse: 3.0),
-    unique: true, // base: Boxville
+    unique: true, // base:
+    modeleBase: "Boxville",
   ),
   Car(
     id: "boxville",
@@ -6255,7 +6483,8 @@ const carCatalog = <Car>[
     classementRoute: 224,
     classementTerre: 124,
     stats: CarStats(vitesse: 2.5, acceleration: 1.4, adherenceAsphalte: 2.8, adherenceTerre: 2.6, robustesse: 3.0),
-    unique: true, // base: Moocher '83
+    unique: true, // base:
+    modeleBase: "Moocher '83",
   ),
   Car(
     id: "moocher",
@@ -6319,7 +6548,8 @@ const carCatalog = <Car>[
     classementRoute: 252,
     classementTerre: 392,
     stats: CarStats(vitesse: 2.4, acceleration: 2.2, adherenceAsphalte: 2.8, adherenceTerre: 5.7, robustesse: 3.0),
-    unique: true, // base: Youga '74
+    unique: true, // base:
+    modeleBase: "Youga '74",
   ),
   Car(
     id: "journey",
@@ -6351,7 +6581,8 @@ const carCatalog = <Car>[
     classementRoute: 227,
     classementTerre: 114,
     stats: CarStats(vitesse: 2.4, acceleration: 1.8, adherenceAsphalte: 2.5, adherenceTerre: 2.3, robustesse: 3.0),
-    unique: true, // base: Journey '78
+    unique: true, // base:
+    modeleBase: "Journey '78",
   ),
   Car(
     id: "driveshaft-journey",
@@ -6367,7 +6598,8 @@ const carCatalog = <Car>[
     classementRoute: 227,
     classementTerre: 114,
     stats: CarStats(vitesse: 2.4, acceleration: 1.8, adherenceAsphalte: 2.5, adherenceTerre: 2.3, robustesse: 3.0),
-    unique: true, // base: Journey '78
+    unique: true, // base:
+    modeleBase: "Journey '78",
   ),
   Car(
     id: "benson",
@@ -6479,7 +6711,8 @@ const carCatalog = <Car>[
     classementRoute: 191,
     classementTerre: 124,
     stats: CarStats(vitesse: 2.0, acceleration: 1.5, adherenceAsphalte: 2.2, adherenceTerre: 2.5, robustesse: 3.0),
-    unique: true, // base: Phantom Custom '81
+    unique: true, // base:
+    modeleBase: "Phantom Custom '81",
   ),
   Car(
     id: "polaris-ranger",
@@ -6543,7 +6776,8 @@ const carCatalog = <Car>[
     classementRoute: 128,
     classementTerre: 251,
     stats: CarStats(vitesse: 1.1, acceleration: 1.3, adherenceAsphalte: 1.2, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "tactical-caddy",
@@ -6559,7 +6793,8 @@ const carCatalog = <Car>[
     classementRoute: 108,
     classementTerre: 222,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ), // CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.6, robustesse: 3.0)
   Car(
     id: "sweet-land-caddy",
@@ -6575,7 +6810,8 @@ const carCatalog = <Car>[
     classementRoute: 108,
     classementTerre: 222,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "swampy-sals-caddy",
@@ -6591,7 +6827,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 171,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "pink-champagne-caddy",
@@ -6607,7 +6844,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 171,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "partytime-caddy",
@@ -6623,7 +6861,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 147,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 2.8, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "lowrider-caddy",
@@ -6639,7 +6878,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 147,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 2.8, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "glamor-caddy",
@@ -6655,7 +6895,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 171,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "donk-caddy",
@@ -6671,7 +6912,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 171,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "cellerica-caddy",
@@ -6687,7 +6929,8 @@ const carCatalog = <Car>[
     classementRoute: 110,
     classementTerre: 171,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 3.2, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "celebration-caddy",
@@ -6703,7 +6946,8 @@ const carCatalog = <Car>[
     classementRoute: 107,
     classementTerre: 133,
     stats: CarStats(vitesse: 1.0, acceleration: 0.9, adherenceAsphalte: 1.2, adherenceTerre: 2.6, robustesse: 3.5),
-    unique: true, // base: Caddy '82
+    unique: true, // base:
+    modeleBase: "Caddy '82",
   ),
   Car(
     id: "camo-caddy",
@@ -6719,7 +6963,8 @@ const carCatalog = <Car>[
     classementRoute: 105,
     classementTerre: 232,
     stats: CarStats(vitesse: 1.0, acceleration: 0.8, adherenceAsphalte: 1.2, adherenceTerre: 3.6, robustesse: 3.0),
-    unique: true, // base: Caddy
+    unique: true, // base:
+    modeleBase: "Caddy",
   ),
   Car(
     id: "caddy",
@@ -6783,7 +7028,8 @@ const carCatalog = <Car>[
     classementRoute: 42,
     classementTerre: 90,
     stats: CarStats(vitesse: 0.6, acceleration: 0.1, adherenceAsphalte: 0.7, adherenceTerre: 2.0, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "airtug",
@@ -6815,7 +7061,8 @@ const carCatalog = <Car>[
     classementRoute: 19,
     classementTerre: 20,
     stats: CarStats(vitesse: 0.3, acceleration: 0.1, adherenceAsphalte: 0.3, adherenceTerre: 0.4, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "seashell-boomazoom",
@@ -6831,7 +7078,8 @@ const carCatalog = <Car>[
     classementRoute: 19,
     classementTerre: 20,
     stats: CarStats(vitesse: 0.3, acceleration: 0.1, adherenceAsphalte: 0.3, adherenceTerre: 0.4, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "nugget-boomazoom",
@@ -6847,7 +7095,8 @@ const carCatalog = <Car>[
     classementRoute: 19,
     classementTerre: 20,
     stats: CarStats(vitesse: 0.3, acceleration: 0.1, adherenceAsphalte: 0.3, adherenceTerre: 0.4, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "forklift",
@@ -6879,7 +7128,8 @@ const carCatalog = <Car>[
     classementRoute: 19,
     classementTerre: 20,
     stats: CarStats(vitesse: 0.3, acceleration: 0.1, adherenceAsphalte: 0.3, adherenceTerre: 0.4, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "donk-boomazoom",
@@ -6895,7 +7145,8 @@ const carCatalog = <Car>[
     classementRoute: 19,
     classementTerre: 20,
     stats: CarStats(vitesse: 0.3, acceleration: 0.1, adherenceAsphalte: 0.3, adherenceTerre: 0.4, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "spec-ops-boomazoom",
@@ -6911,7 +7162,8 @@ const carCatalog = <Car>[
     classementRoute: 17,
     classementTerre: 31,
     stats: CarStats(vitesse: 0.2, acceleration: 0.1, adherenceAsphalte: 0.2, adherenceTerre: 0.7, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "lowrider-boomazoom",
@@ -6927,7 +7179,8 @@ const carCatalog = <Car>[
     classementRoute: 17,
     classementTerre: 31,
     stats: CarStats(vitesse: 0.2, acceleration: 0.1, adherenceAsphalte: 0.2, adherenceTerre: 0.7, robustesse: 4.0),
-    unique: true, // base: Boomazoom
+    unique: true, // base:
+    modeleBase: "Boomazoom",
   ),
   Car(
     id: "mobility-scooter-pride-maxima-3",
@@ -6959,7 +7212,9 @@ const carCatalog = <Car>[
     classementRoute: null,
     classementTerre: null,
     stats: null,
-    unique: true, // base: Elegy '90
+    unique: true, // base:
+    modeleBase: "Elegy '90",
+    dlc: "GTA+",
   ),
   Car(
     id: "tow-truck-2",
@@ -7008,6 +7263,7 @@ const carCatalog = <Car>[
     classementTerre: null,
     stats: null,
     unique: false,
+    dlc: "Précommande",
   ),
   Car(
     id: "ripley",
@@ -7039,7 +7295,8 @@ const carCatalog = <Car>[
     classementRoute: null,
     classementTerre: null,
     stats: null,
-    unique: true, // base: Erode
+    unique: true, // base:
+    modeleBase: "Erode",
   ),
   Car(
     id: "lombike",
@@ -7103,7 +7360,8 @@ const carCatalog = <Car>[
     classementRoute: null,
     classementTerre: null,
     stats: null,
-    unique: true, // base: Erode
+    unique: true, // base:
+    modeleBase: "Erode",
   ),
   Car(
     id: "erode",
@@ -7167,6 +7425,7 @@ const carCatalog = <Car>[
     classementRoute: null,
     classementTerre: null,
     stats: null,
-    unique: true, // base: Golfer '32
+    unique: true, // base:
+    modeleBase: "Golfer '32",
   ),
 ];

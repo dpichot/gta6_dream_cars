@@ -10,7 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> _toggleCarFromSearch(WidgetTester tester, Car car) async {
   await tester.tap(find.text('Rechercher une voiture'));
   await tester.pumpAndSettle();
-  await tester.tap(find.byKey(ValueKey('toggle-car-${car.id}')));
+  final toggleFinder = find.byKey(ValueKey('toggle-car-${car.id}'));
+  await tester.tap(toggleFinder);
   await tester.pumpAndSettle();
   tester.state<NavigatorState>(find.byType(Navigator).last).pop();
   await tester.pumpAndSettle();
@@ -25,7 +26,7 @@ void main() {
     await tester.pumpWidget(const GarageApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('DREAM GARAGE'), findsOneWidget);
+    expect(find.text('LEONIDA DREAM GARAGE'), findsOneWidget);
     expect(find.text('Garage vide'), findsOneWidget);
 
     await _toggleCarFromSearch(tester, carCatalog.first);
@@ -91,6 +92,106 @@ void main() {
     final preferences = await SharedPreferences.getInstance();
     final savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
     expect(savedCars.single['id'], carCatalog[1].id);
+  });
+
+  testWidgets('les paramètres sont accessibles et ne vident que le garage', (tester) async {
+    SharedPreferences.setMockInitialValues({'garage_cars': '[]', 'garage_filters': '{"sortBy":"brand","groupBy":null}'});
+
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Paramètres'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('PARAMÈTRES'), findsOneWidget);
+    expect(find.text('Powered by Flutter'), findsOneWidget);
+    expect(find.text('Licences open source'), findsOneWidget);
+    expect(find.text('Exporter le garage'), findsOneWidget);
+    expect(find.text('Importer une sauvegarde'), findsOneWidget);
+
+    await tester.tap(find.text('Vider le garage'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Vider le garage').last);
+    await tester.pumpAndSettle();
+
+    final preferences = await SharedPreferences.getInstance();
+    expect(preferences.getString('garage_cars'), isNull);
+    expect(preferences.getString('garage_filters'), '{"sortBy":"brand","groupBy":null}');
+  });
+
+  testWidgets('la fiche ouverte depuis la recherche synchronise le garage et le switch', (tester) async {
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Rechercher une voiture'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).first, carCatalog.first.nom);
+    await tester.pumpAndSettle();
+    final carFinder = find.text(carCatalog.first.nom.toUpperCase());
+    await tester.tap(carFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('FICHE VÉHICULE'), findsOneWidget);
+    final switchFinder = find.byKey(ValueKey('detail-ownership-${carCatalog.first.id}'));
+    await tester.scrollUntilVisible(switchFinder, 250, scrollable: find.byType(Scrollable).last);
+    expect(tester.widget<Switch>(switchFinder).onChanged, isNull);
+
+    await tester.tap(find.byTooltip('Ajouter à la liste'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('FICHE VÉHICULE'), findsOneWidget);
+    expect(find.byTooltip('Supprimer de la liste'), findsOneWidget);
+    expect(tester.widget<Switch>(switchFinder).onChanged, isNotNull);
+
+    await tester.tap(switchFinder);
+    await tester.pumpAndSettle();
+    expect(tester.widget<Switch>(switchFinder).value, isTrue);
+
+    var preferences = await SharedPreferences.getInstance();
+    var savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['possédée'], isTrue);
+
+    await tester.tap(find.byTooltip('Supprimer de la liste'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('FICHE VÉHICULE'), findsOneWidget);
+    expect(find.byTooltip('Ajouter à la liste'), findsOneWidget);
+    expect(tester.widget<Switch>(switchFinder).onChanged, isNull);
+    preferences = await SharedPreferences.getInstance();
+    savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars, isEmpty);
+
+    await tester.tap(find.byTooltip('Ajouter à la liste'));
+    await tester.pumpAndSettle();
+    expect(tester.widget<Switch>(switchFinder).onChanged, isNotNull);
+    expect(tester.widget<Switch>(switchFinder).value, isFalse);
+    preferences = await SharedPreferences.getInstance();
+    savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['possédée'], isFalse);
+  });
+
+  testWidgets('le toggle de la fiche agit sur la voiture affichée après un swipe', (tester) async {
+    final orderedCars = [...carCatalog]
+      ..sort((first, second) {
+        final comparison = first.nom.toLowerCase().compareTo(second.nom.toLowerCase());
+        return comparison != 0 ? comparison : first.id.compareTo(second.id);
+      });
+
+    await tester.pumpWidget(const GarageApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Rechercher une voiture'));
+    await tester.pumpAndSettle();
+    final firstCarFinder = find.text(orderedCars.first.nom.toUpperCase());
+    await tester.tap(firstCarFinder);
+    await tester.pumpAndSettle();
+    await tester.drag(find.byType(PageView).last, const Offset(-500, 0));
+    await tester.pumpAndSettle();
+    expect(find.text(orderedCars[1].nom.toUpperCase()).last, findsOneWidget);
+
+    await tester.tap(find.byTooltip('Ajouter à la liste'));
+    await tester.pumpAndSettle();
+
+    final preferences = await SharedPreferences.getInstance();
+    final savedCars = jsonDecode(preferences.getString('garage_cars')!) as List;
+    expect(savedCars.single['id'], orderedCars[1].id);
   });
 
   testWidgets('la fiche affiche les données et l’image du véhicule', (tester) async {

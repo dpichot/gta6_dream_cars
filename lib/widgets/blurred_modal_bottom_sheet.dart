@@ -9,7 +9,7 @@ const filterSheetDecoration = BoxDecoration(
     colors: [Color(0xFF202449), Color(0xFF191526), Color(0xFF0D0F16)],
     stops: [0, .48, 1],
   ),
-  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+  borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
 );
 
 Future<T?> showBlurredModalBottomSheet<T>({required BuildContext context, required WidgetBuilder builder}) {

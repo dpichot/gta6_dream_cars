@@ -15,6 +15,7 @@ class Car {
     this.modeleBase,
     this.stats,
     this.unique = false,
+    this.dlc,
   }) : assert(classementRoute == null || (classementRoute >= 1 && classementRoute <= 999)),
        assert(classementTerre == null || (classementTerre >= 1 && classementTerre <= 999));
 
@@ -33,6 +34,7 @@ class Car {
   final String? modeleBase;
   final CarStats? stats;
   final bool unique;
+  final String? dlc;
 
   Car copyWith({bool? possedee}) {
     return Car(
@@ -51,6 +53,7 @@ class Car {
       modeleBase: modeleBase,
       stats: stats,
       unique: unique,
+      dlc: dlc,
     );
   }
 
@@ -71,6 +74,7 @@ class Car {
       modeleBase: modeleBase ?? fallback.modeleBase,
       stats: stats ?? fallback.stats,
       unique: fallback.unique,
+      dlc: dlc ?? fallback.dlc,
     );
   }
 
@@ -90,6 +94,7 @@ class Car {
     'modeleBase': modeleBase,
     'stats': stats?.toJson(),
     'unique': unique,
+    'dlc': dlc,
   };
 
   factory Car.fromJson(Map<String, dynamic> json) {
@@ -110,6 +115,7 @@ class Car {
       modeleBase: json['modeleBase'] as String?,
       stats: statsJson == null ? null : CarStats.fromJson(Map<String, dynamic>.from(statsJson as Map)),
       unique: json['unique'] as bool? ?? false,
+      dlc: json['dlc'] as String?,
     );
   }
 }

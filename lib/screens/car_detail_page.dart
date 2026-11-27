@@ -1,32 +1,57 @@
 import 'package:gta6_dream_cars/main.dart';
+import 'package:gta6_dream_cars/widgets/info_row.dart';
+import 'package:gta6_dream_cars/widgets/ranking_row.dart';
+import 'package:gta6_dream_cars/widgets/rating_row.dart';
+import 'package:gta6_dream_cars/widgets/section_title.dart';
+import 'package:gta6_dream_cars/widgets/tag.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../models/car.dart';
 import '../widgets/car_image.dart';
 
 class CarDetailPage extends StatefulWidget {
-  const CarDetailPage({super.key, required this.cars, required this.initialIndex, required this.onPossessionChanged, required this.onRemove});
+  const CarDetailPage({
+    super.key,
+    required this.cars,
+    this.existingCarIds,
+    required this.initialIndex,
+    required this.onPossessionChanged,
+    this.onRemove,
+    this.onToggle,
+  });
 
   final List<Car> cars;
+  final Set<String>? existingCarIds;
   final int initialIndex;
   final Future<bool> Function(String, bool) onPossessionChanged;
-  final Future<bool> Function(String) onRemove;
+  final Future<bool> Function(String)? onRemove;
+  final Future<bool> Function(Car)? onToggle;
 
   @override
   State<CarDetailPage> createState() => _CarDetailPageState();
 }
 
 class _CarDetailPageState extends State<CarDetailPage> {
+  // -------------------------------------------------------------------------------------------------
+  // | STATES
+
   late final List<Car> _cars = List.of(widget.cars);
   late final PageController _pageController = PageController(initialPage: widget.initialIndex);
+  late final Set<String> _garageCarIds = {...?widget.existingCarIds};
   late int _currentIndex = widget.initialIndex;
   bool _isSaving = false;
+
+  // -------------------------------------------------------------------------------------------------
+  // | LIFECYCLE
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
   }
+
+  // -------------------------------------------------------------------------------------------------
+  // | METHODS
 
   Future<void> _confirmAndRemove(Car car) async {
     final confirmed = await showDialog<bool>(
@@ -44,7 +69,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
 
     setState(() => _isSaving = true);
     try {
-      final removed = await widget.onRemove(car.id);
+      final removed = await widget.onRemove!(car.id);
       if (!mounted) return;
       setState(() => _isSaving = false);
       if (removed) Navigator.of(context).pop();
@@ -61,7 +86,9 @@ class _CarDetailPageState extends State<CarDetailPage> {
       setState(() {
         if (saved) {
           final index = _cars.indexWhere((item) => item.id == car.id);
-          if (index != -1) _cars[index] = _cars[index].copyWith(possedee: value);
+          if (index != -1) {
+            _cars[index] = _cars[index].copyWith(possedee: value);
+          }
         }
         _isSaving = false;
       });
@@ -70,28 +97,35 @@ class _CarDetailPageState extends State<CarDetailPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: const Text('FICHE VÉHICULE'),
-        actions: [
-          IconButton(
-            tooltip: 'Supprimer de la liste',
-            onPressed: _isSaving ? null : () => _confirmAndRemove(_cars[_currentIndex]),
-            icon: Icon(Icons.delete_outline, color: Colors.white),
-          ),
-        ],
-      ),
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: _cars.length,
-        onPageChanged: (index) => setState(() => _currentIndex = index),
-        itemBuilder: (context, index) => _buildCarDetails(_cars[index]),
-      ),
-    );
+  Future<void> _toggleGarageStatus(Car car) async {
+    if (_isSaving || widget.onToggle == null) return;
+
+    setState(() => _isSaving = true);
+    try {
+      final wasInGarage = _garageCarIds.contains(car.id);
+      final updated = await widget.onToggle!(car);
+      if (!mounted) return;
+      setState(() {
+        if (updated) {
+          if (wasInGarage) {
+            _garageCarIds.remove(car.id);
+          } else {
+            _garageCarIds.add(car.id);
+            final index = _cars.indexWhere((item) => item.id == car.id);
+            if (index != -1) {
+              _cars[index] = _cars[index].copyWith(possedee: false);
+            }
+          }
+        }
+        _isSaving = false;
+      });
+    } finally {
+      if (mounted && _isSaving) setState(() => _isSaving = false);
+    }
   }
+
+  // -------------------------------------------------------------------------------------------------
+  // | WIDGETS
 
   Widget _buildCarDetails(Car car) {
     return ListView(
@@ -104,13 +138,19 @@ class _CarDetailPageState extends State<CarDetailPage> {
               borderRadius: BorderRadius.circular(0),
               child: AspectRatio(aspectRatio: 1.65, child: CarImage(car: car)),
             ),
-            if (car.categorie != null) Positioned(top: 8, right: 8, child: ClassTag(label: car.categorie!.toUpperCase(), textSize: 14)),
+            if (car.categorie != null) Positioned(top: 8, right: 8, child: Tag(label: car.categorie!.toUpperCase(), textSize: 14)),
             Positioned(top: 8, left: 8, child: CarBrandLogo(car: car, size: 30)),
             if (car.unique)
               Positioned(
                 bottom: 5,
                 right: 5,
-                child: ClassTag(label: "Remarquable", color: Color.fromARGB(153, 255, 191, 0), textSize: 14),
+                child: Tag(label: "Remarquable", color: Color.fromARGB(153, 255, 191, 0), textSize: 14),
+              ),
+            if (car.dlc != null)
+              Positioned(
+              bottom: 5,
+                left: 5,
+                child: Tag(label: car.dlc!, color: Color.fromARGB(153, 189, 0, 0), textSize: 14),
               ),
           ],
         ),
@@ -139,10 +179,10 @@ class _CarDetailPageState extends State<CarDetailPage> {
                 child: Switch(
                   key: ValueKey('detail-ownership-${car.id}'),
                   value: car.possedee,
-                  onChanged: _isSaving ? null : (value) => _changePossession(car, value),
+                  onChanged: _isSaving || !_garageCarIds.contains(car.id) ? null : (value) => _changePossession(car, value),
                   activeThumbColor: Colors.white,
                   activeTrackColor: pink,
-                  trackOutlineColor: WidgetStateColor.resolveWith((e) => Colors.white),
+                  trackOutlineColor: WidgetStateColor.resolveWith((states) => states.contains(WidgetState.disabled) ? Colors.grey : Colors.white),
                 ),
               ),
             ],
@@ -154,12 +194,12 @@ class _CarDetailPageState extends State<CarDetailPage> {
           decoration: BoxDecoration(color: const Color.fromARGB(98, 12, 13, 27)),
           child: Column(
             children: [
-              _InfoRow('Accès', car.access),
-              _InfoRow('Sécurité', car.securite.toString()),
-              _InfoRow('Traceur', car.tracker),
-              _InfoRow('Style', car.style),
-              _InfoRow('Nombre de places', car.nombrePlaces?.toString()),
-              if (car.modeleBase != null) _InfoRow('Modèle de base', car.modeleBase, isLast: true),
+              InfoRow('Accès', car.access),
+              InfoRow('Sécurité', car.securite.toString()),
+              InfoRow('Traceur', car.tracker),
+              InfoRow('Style', car.style),
+              InfoRow('Nombre de places', car.nombrePlaces?.toString(), isLast: car.modeleBase == null),
+              if (car.modeleBase != null) InfoRow('Modèle de base', car.modeleBase, isLast: car.modeleBase != null),
             ],
           ),
         ),
@@ -173,11 +213,11 @@ class _CarDetailPageState extends State<CarDetailPage> {
               children: [
                 RankingRow(routeRank: car.classementRoute, terrainRank: car.classementTerre),
                 SizedBox(height: 16),
-                _RatingRow('Vitesse', car.stats?.vitesse),
-                _RatingRow('Accélération', car.stats?.acceleration),
-                _RatingRow('Adhérence asphalte', car.stats?.adherenceAsphalte),
-                _RatingRow('Adhérence terre', car.stats?.adherenceTerre),
-                _RatingRow('Robustesse', car.stats?.robustesse, isLast: true),
+                RatingRow('Vitesse', car.stats?.vitesse),
+                RatingRow('Accélération', car.stats?.acceleration),
+                RatingRow('Adhérence asphalte', car.stats?.adherenceAsphalte),
+                RatingRow('Adhérence terre', car.stats?.adherenceTerre),
+                RatingRow('Robustesse', car.stats?.robustesse, isLast: true),
               ],
             ),
           ),
@@ -185,176 +225,40 @@ class _CarDetailPageState extends State<CarDetailPage> {
       ],
     );
   }
-}
 
-class SectionTitle extends StatelessWidget {
-  const SectionTitle(this.title, {super.key});
-
-  final String title;
+  // -------------------------------------------------------------------------------------------------
+  // | WIDGETS
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, letterSpacing: 1.5)),
-    );
-  }
-}
-
-class _InfoRow extends StatelessWidget {
-  const _InfoRow(this.label, this.value, {this.isLast = false});
-
-  final String label;
-  final String? value;
-  final bool isLast;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(16, 13, 16, isLast ? 13 : 10),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(child: Text(label.toUpperCase())),
-              const SizedBox(width: 12),
-              if ((label == "Sécurité" || label == "Accès" || label == "Traceur") && value != null)
-                Flexible(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade900,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.black, width: 2),
-                    ),
-                    child: Icon(
-                      label == "Sécurité"
-                          ? Icons.shield
-                          : label == "Traceur"
-                          ? Icons.gps_fixed
-                          : Icons.key,
-                      size: 12,
-                      color: label == "Sécurité"
-                          ? (value == "true" ? Colors.red : Colors.grey)
-                          : label == "Traceur"
-                          ? ((value?.contains("Advanced") ?? false) ? Colors.red : Colors.orange)
-                          : ((value?.contains("Key cloner") ?? false) ? Colors.red : Colors.white),
-                    ),
-                  ),
-                )
-              else
-                Flexible(
-                  child: Text(
-                    (value ?? 'Non renseigné').toUpperCase(),
-                    textAlign: TextAlign.end,
-                    style: TextStyle(color: value == null ? Colors.white.withValues(alpha: .5) : Colors.white, fontWeight: FontWeight.w700),
-                  ),
-                ),
-            ],
-          ),
-          if (!isLast)
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Divider(height: 1, color: Color(0xFF292C38)),
+    final currentCar = _cars[_currentIndex];
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: const Text('FICHE VÉHICULE'),
+        actions: [
+          if (widget.onRemove != null)
+            IconButton(
+              tooltip: 'Supprimer de la liste',
+              onPressed: _isSaving ? null : () => _confirmAndRemove(_cars[_currentIndex]),
+              icon: Icon(Icons.delete_outline, color: Colors.white),
+            ),
+          if (widget.onToggle != null)
+            IconButton(
+              tooltip: _garageCarIds.contains(currentCar.id) ? 'Supprimer de la liste' : 'Ajouter à la liste',
+              onPressed: _isSaving ? null : () => _toggleGarageStatus(currentCar),
+              icon: Icon(_garageCarIds.contains(currentCar.id) ? Icons.delete_outline : Icons.add_circle_outline, color: Colors.white),
             ),
         ],
       ),
-    );
-  }
-}
-
-class _RatingRow extends StatelessWidget {
-  const _RatingRow(this.label, this.value, {this.isLast = false});
-
-  final String label;
-  final double? value;
-  final bool isLast;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: isLast ? 0 : 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(child: Text(label.toUpperCase())),
-              Container(
-                color: const Color.fromARGB(255, 13, 14, 18),
-                child: Text(
-                  value == null ? 'Non renseigné' : value!.toStringAsFixed(1),
-                  style: TextStyle(color: value == null ? Colors.white.withValues(alpha: .5) : Colors.white, fontWeight: FontWeight.w700),
-                ),
-              ),
-            ],
-          ),
-          if (value != null) ...[
-            const SizedBox(height: 8),
-            SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                trackHeight: 10,
-                disabledActiveTrackColor: Colors.white,
-                disabledInactiveTrackColor: const Color(0xFF292C38),
-                disabledThumbColor: Colors.white,
-                overlayColor: Colors.transparent,
-                trackShape: RectangularSliderTrackShape(),
-                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 0),
-                padding: const EdgeInsets.all(0),
-              ),
-              child: Slider(value: value!.clamp(1.0, 10.0).toDouble(), min: 1, max: 10, onChanged: null),
-            ),
-          ],
-        ],
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: _cars.length,
+        onPageChanged: (index) => setState(() => _currentIndex = index),
+        itemBuilder: (context, index) => _buildCarDetails(_cars[index]),
       ),
     );
   }
-}
 
-class RankingRow extends StatelessWidget {
-  const RankingRow({super.key, required this.routeRank, required this.terrainRank});
-
-  final int? routeRank;
-  final int? terrainRank;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        _RankingItem(label: 'Classement route', icon: Icons.route, value: routeRank),
-        const SizedBox(width: 20),
-        _RankingItem(label: 'Classement terre', icon: Icons.terrain, value: terrainRank),
-      ],
-    );
-  }
-}
-
-class _RankingItem extends StatelessWidget {
-  const _RankingItem({required this.label, required this.icon, required this.value});
-
-  final String label;
-  final IconData icon;
-  final int? value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: label,
-      child: Semantics(
-        label: '$label: ${value ?? 'non renseigné'}',
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)),
-              child: Icon(icon, size: 20, color: Colors.white),
-            ),
-            const SizedBox(width: 8),
-            Text(value?.toString() ?? '—', style: const TextStyle(fontWeight: FontWeight.w900)),
-          ],
-        ),
-      ),
-    );
-  }
+  // -------------------------------------------------------------------------------------------------
 }
