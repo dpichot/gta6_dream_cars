@@ -8,6 +8,8 @@ const turquoise = Color(0xFF22CBB5);
 
 const maxGarageCars = 22;
 
+final ValueNotifier<bool> editionMode = ValueNotifier(false);
+
 void main() {
   runApp(const GarageApp());
 }

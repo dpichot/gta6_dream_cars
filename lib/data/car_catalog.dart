@@ -4935,7 +4935,6 @@ const carCatalog = <Car>[
     classementTerre: 706,
     stats: CarStats(vitesse: 3.9, acceleration: 5.7, adherenceAsphalte: 5.2, adherenceTerre: 7.6, robustesse: 4.0),
     unique: false,
-    dlc: "Edition ultime",
   ),
   Car(
     id: "chino",

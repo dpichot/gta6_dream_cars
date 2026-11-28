@@ -1,4 +1,6 @@
 import 'package:gta6_dream_cars/main.dart';
+import 'package:gta6_dream_cars/screens/edit_car_page.dart';
+import 'package:gta6_dream_cars/utils/routeur.dart';
 import 'package:gta6_dream_cars/widgets/info_row.dart';
 import 'package:gta6_dream_cars/widgets/ranking_row.dart';
 import 'package:gta6_dream_cars/widgets/rating_row.dart';
@@ -18,6 +20,7 @@ class CarDetailPage extends StatefulWidget {
     required this.onPossessionChanged,
     this.onRemove,
     this.onToggle,
+    this.onEdit,
   });
 
   final List<Car> cars;
@@ -26,6 +29,7 @@ class CarDetailPage extends StatefulWidget {
   final Future<bool> Function(String, bool) onPossessionChanged;
   final Future<bool> Function(String)? onRemove;
   final Future<bool> Function(Car)? onToggle;
+  final Future<bool> Function(Car)? onEdit;
 
   @override
   State<CarDetailPage> createState() => _CarDetailPageState();
@@ -124,6 +128,26 @@ class _CarDetailPageState extends State<CarDetailPage> {
     }
   }
 
+  Future<void> _editCar(Car car) async {
+    final updatedCar = await Navigator.of(context).push<Car>(garagePageRoute<Car>(EditCarPage(car: car)));
+    if (updatedCar == null || !mounted || widget.onEdit == null) return;
+
+    setState(() => _isSaving = true);
+    try {
+      final saved = await widget.onEdit!(updatedCar);
+      if (!mounted) return;
+      setState(() {
+        if (saved) {
+          final index = _cars.indexWhere((item) => item.id == updatedCar.id);
+          if (index != -1) _cars[index] = updatedCar;
+        }
+        _isSaving = false;
+      });
+    } finally {
+      if (mounted && _isSaving) setState(() => _isSaving = false);
+    }
+  }
+
   // -------------------------------------------------------------------------------------------------
   // | WIDGETS
 
@@ -148,7 +172,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
               ),
             if (car.dlc != null)
               Positioned(
-              bottom: 5,
+                bottom: 5,
                 left: 5,
                 child: Tag(label: car.dlc!, color: Color.fromARGB(153, 189, 0, 0), textSize: 14),
               ),
@@ -248,6 +272,13 @@ class _CarDetailPageState extends State<CarDetailPage> {
               tooltip: _garageCarIds.contains(currentCar.id) ? 'Supprimer de la liste' : 'Ajouter à la liste',
               onPressed: _isSaving ? null : () => _toggleGarageStatus(currentCar),
               icon: Icon(_garageCarIds.contains(currentCar.id) ? Icons.delete_outline : Icons.add_circle_outline, color: Colors.white),
+            ),
+
+          if (editionMode.value && widget.onEdit != null)
+            IconButton(
+              tooltip: 'Editer',
+              onPressed: _isSaving ? null : () => _editCar(currentCar),
+              icon: Icon(Icons.edit, color: Colors.white),
             ),
         ],
       ),

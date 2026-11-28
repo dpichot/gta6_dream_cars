@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:material_ui/material_ui.dart';
 
 import '../models/car.dart';
@@ -11,6 +13,14 @@ class CarImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (car.imagePath != null) {
+      return Image.file(
+        File(car.imagePath!),
+        fit: fit,
+        errorBuilder: (context, error, stackTrace) => _buildAssetImage(_imageCandidates(car), 0),
+      );
+    }
+
     return _buildAssetImage(_imageCandidates(car), 0);
   }
 

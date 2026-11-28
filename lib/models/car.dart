@@ -16,6 +16,8 @@ class Car {
     this.stats,
     this.unique = false,
     this.dlc,
+    this.detailsEdited = false,
+    this.imagePath,
   }) : assert(classementRoute == null || (classementRoute >= 1 && classementRoute <= 999)),
        assert(classementTerre == null || (classementTerre >= 1 && classementTerre <= 999));
 
@@ -35,6 +37,8 @@ class Car {
   final CarStats? stats;
   final bool unique;
   final String? dlc;
+  final bool detailsEdited;
+  final String? imagePath;
 
   Car copyWith({bool? possedee}) {
     return Car(
@@ -54,10 +58,14 @@ class Car {
       stats: stats,
       unique: unique,
       dlc: dlc,
+      detailsEdited: detailsEdited,
+      imagePath: imagePath,
     );
   }
 
   Car withDefaultsFrom(Car fallback) {
+    if (detailsEdited) return this;
+
     return Car(
       id: id,
       nom: nom,
@@ -75,6 +83,8 @@ class Car {
       stats: stats ?? fallback.stats,
       unique: fallback.unique,
       dlc: dlc ?? fallback.dlc,
+      detailsEdited: detailsEdited,
+      imagePath: imagePath ?? fallback.imagePath,
     );
   }
 
@@ -95,6 +105,8 @@ class Car {
     'stats': stats?.toJson(),
     'unique': unique,
     'dlc': dlc,
+    'detailsEdited': detailsEdited,
+    'imagePath': imagePath,
   };
 
   factory Car.fromJson(Map<String, dynamic> json) {
@@ -116,6 +128,8 @@ class Car {
       stats: statsJson == null ? null : CarStats.fromJson(Map<String, dynamic>.from(statsJson as Map)),
       unique: json['unique'] as bool? ?? false,
       dlc: json['dlc'] as String?,
+      detailsEdited: json['detailsEdited'] as bool? ?? false,
+      imagePath: json['imagePath'] as String?,
     );
   }
 }

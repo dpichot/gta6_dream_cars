@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gta6_dream_cars/data/car_catalog.dart';
+import 'package:gta6_dream_cars/models/car.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:gta6_dream_cars/services/car_storage.dart';
@@ -48,5 +50,27 @@ void main() {
 
   test('clearing an already empty garage is harmless', () async {
     await CarStorage().clearCars();
+  });
+
+  test('edited car details keep explicit empty values when defaults are merged', () {
+    final catalogCar = carCatalog.first;
+    final editedCar = Car.fromJson(
+      Car(
+        id: catalogCar.id,
+        nom: 'Voiture personnalisée',
+        marque: catalogCar.marque,
+        possedee: false,
+        unique: false,
+        detailsEdited: true,
+        imagePath: 'custom/cars/test-car.png',
+      ).toJson(),
+    );
+
+    final restoredCar = editedCar.withDefaultsFrom(catalogCar);
+
+    expect(restoredCar.nom, 'Voiture personnalisée');
+    expect(restoredCar.categorie, isNull);
+    expect(restoredCar.unique, isFalse);
+    expect(restoredCar.imagePath, 'custom/cars/test-car.png');
   });
 }

@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:gta6_dream_cars/main.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -161,6 +162,29 @@ class _SettingsPageState extends State<SettingsPage> {
               title: const Text('Licences open source'),
               trailing: const Icon(Icons.chevron_right),
               onTap: _showLicenses,
+            ),
+          ]),
+          const SizedBox(height: 20),
+          const SectionTitle('ADMIN'),
+          _settingsPanel([
+            ListTile(
+              leading: const Icon(Icons.edit_note),
+              title: const Text('Mode édition'),
+              trailing: Transform.scale(
+                scale: 0.6,
+                child: Switch(
+                  value: editionMode.value,
+                  onChanged: (val) => setState(() {
+                    editionMode.value = !editionMode.value;
+                  }),
+                  activeThumbColor: Colors.white,
+                  activeTrackColor: pink,
+                  trackOutlineColor: WidgetStateColor.resolveWith((states) => states.contains(WidgetState.disabled) ? Colors.grey : Colors.white),
+                ),
+              ),
+              onTap: () => setState(() {
+                editionMode.value = !editionMode.value;
+              }),
             ),
           ]),
         ],

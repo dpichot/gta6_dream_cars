@@ -360,6 +360,28 @@ class _GaragePageState extends State<GaragePage> {
     }
   }
 
+  Future<bool> _updateCar(Car updatedCar) async {
+    if (_savingCarIds.contains(updatedCar.id)) return false;
+    final index = _cars.indexWhere((car) => car.id == updatedCar.id);
+    if (index == -1) return false;
+
+    final updatedCars = [..._cars];
+    updatedCars[index] = updatedCar;
+    setState(() => _savingCarIds.add(updatedCar.id));
+
+    try {
+      await _storage.saveCars(updatedCars);
+      if (!mounted) return false;
+      setState(() => _cars = updatedCars);
+      return true;
+    } catch (error) {
+      if (mounted) _showSaveError(error);
+      return false;
+    } finally {
+      if (mounted) setState(() => _savingCarIds.remove(updatedCar.id));
+    }
+  }
+
   Future<void> _openSearch() async {
     await Navigator.of(context).push<void>(
       garagePageRoute<void>(
@@ -392,6 +414,7 @@ class _GaragePageState extends State<GaragePage> {
           initialIndex: initialIndex,
           onPossessionChanged: _toggleOwnership,
           onRemove: _removeCar,
+          onEdit: _updateCar,
         ),
       ),
     );
